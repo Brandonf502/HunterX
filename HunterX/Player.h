@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
@@ -8,6 +10,9 @@ private:
 	std::vector <std::string> inventory;
 
 public:
+	Player();
 	Player(const std::string& playerName);
 
+	std::string getName() const;
+	int getHealth() const;
 };

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="HunterX/HunterX.vcxproj" />
+  <Project Path="HunterX/HunterX.vcxproj" Id="dbf9341a-14ad-4c15-9d53-81d1c0d8d00c" />
 </Solution>
