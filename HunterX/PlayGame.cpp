@@ -2,6 +2,7 @@
 #include "TitleScreen.h"
 #include "MainMenu.h"
 #include "CharacterCreation.h"
+#include "LoadSave.h"
 #include <iostream>
 
 void PlayGame::gameOn() {
@@ -29,7 +30,7 @@ void PlayGame::gameOn() {
 			break;
 		}
 
-		case GameMode::MainMenu: 
+		case GameMode::MainMenu:
 		{
 			state.checkSavedState();
 			if (state.checkSavedState()) {
@@ -50,26 +51,39 @@ void PlayGame::gameOn() {
 				else {
 					state.currentMode = GameMode::TitleScreen;
 				}
-				
+
 			}
 			else {
 				state.currentMode = GameMode::CharacterCreation;
 			}
-		}
-			
+
 			break;
+		}
 
 		case GameMode::CharacterCreation:
 		{
 			Player player = createCharacter();
 			saveCharacter(player);
 			state.currentMode = GameMode::MainMenu;
+
+			break;
 		}
-			break;
 
-		case GameMode::LoadSavedState:
-			break;
+		case GameMode::LoadSavedState: {
+			std::vector<savedStates> savedGames = loadSavedGames();
+			int choice = chooseSavedGames(savedGames);
 
+			if (choice == -1) {
+				state.currentMode = GameMode::MainMenu;
+				break;
+			}
+
+			savedStates selectedSave = savedGames[choice];
+			player = Player(selectedSave.playerName);
+			break;
+		}
+			
+		
 		case GameMode::Settings:
 			// Handle settings logic
 			break;

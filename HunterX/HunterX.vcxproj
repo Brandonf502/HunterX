@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="CharacterCreation.cpp" />
     <ClCompile Include="HunterX.cpp" />
+    <ClCompile Include="LoadSave.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player.h" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="CharacterCreation.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="LoadSave.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PlayGame.h" />
     <ClInclude Include="TitleScreen.h" />
