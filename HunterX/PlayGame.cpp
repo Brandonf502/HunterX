@@ -4,6 +4,7 @@
 #include "CharacterCreation.h"
 #include "LoadSave.h"
 #include <iostream>
+#include <cstdlib>
 #include "Controller.h"
 
 void PlayGame::gameOn() {
@@ -13,6 +14,7 @@ void PlayGame::gameOn() {
 	state.currentMode = GameMode::TitleScreen;
 
 	while (state.currentMode != GameMode::Exit) {
+		system("cls");
 
 		switch (state.currentMode) {
 		case GameMode::TitleScreen:
@@ -21,9 +23,12 @@ void PlayGame::gameOn() {
 			int userNum = 0;
 			titleScreen.titlescreen(userNum);
 			Input input = controller.readAction();
-			userNum = input.number;
 			
-
+			
+			if (userNum == 0) {
+				userNum = input.number;
+				titleScreen.titlescreen(userNum);
+			}
 			
 			if (input.number == 1) {
 				state.currentMode = GameMode::MainMenu;

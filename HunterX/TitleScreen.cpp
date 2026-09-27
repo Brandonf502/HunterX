@@ -1,6 +1,8 @@
 #include "TitleScreen.h"
 #include <iostream>
 #include <vector>
+#include <Windows.h>
+#include <cstdlib>
 
 void TitleScreen::displayTitle(const std::vector<std::string>& title) {
 
@@ -31,25 +33,31 @@ void TitleScreen::titlescreen(int userNum) {
 
 
 	if (userNum == choiceOne) {
+		system("cls");
 		title.pop_back();
 		title.pop_back();
 		title.push_back(e);
 		displayTitle(title);
+		Sleep(1200);
 		
 	}
 	else if (userNum == choiceTwo) {
+		system("cls");
 		title.pop_back();
 		title.pop_back();
 		title.pop_back();
 		title.push_back(d);
 		displayTitle(title);
+		Sleep(1200);
 	}
 	else if (userNum != choiceOne && userNum != choiceTwo && userNum != 0) {
+		system("cls");
 		title.pop_back();
 		title.pop_back();
 		title.pop_back();
 		title.push_back(f);
 		displayTitle(title);
+		Sleep(1200);
 		
 	}
 	return;
