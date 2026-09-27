@@ -12,22 +12,19 @@ void MainMenu::displayMenu(const std::vector<std::string>& menuOptions) {
 
 }
 
-int MainMenu::menu() {
+void MainMenu::menu() {
 	std::string a = " ====Main Menu ==== ";
 	std::string b = "   1. New Game ";
 	std::string c = "   2. Start Game ";
 	std::string d = "   3. Settings ";
 	std::string e = "   4. Exit Game ";
 	
-
 	std::vector<std::string> menuOptions = { a, b, c, d, e, };
-
-	int userNum;
 
 	displayMenu(menuOptions);
 
-	std::cin >> userNum;
 	
-	return userNum;
+	
+	return;
 }
 

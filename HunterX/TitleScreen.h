@@ -8,6 +8,6 @@ class TitleScreen {
 private:
 	void displayTitle(const std::vector<std::string>& title);
 public:
-	int titlescreen();
+	void titlescreen(int userNum);
 	
 };

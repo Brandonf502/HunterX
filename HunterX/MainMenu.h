@@ -7,5 +7,5 @@ private:
 	void displayMenu(const std::vector<std::string>& menuOptions);
 
 public: 
-	int menu();
+	void menu();
 };

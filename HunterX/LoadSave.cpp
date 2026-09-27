@@ -31,29 +31,26 @@ std::vector<savedStates> loadSavedGames() {
 				currentSave.currentHealth = std::stoi(value);
 			}
 		}
-		if (!currentSave.playerName.empty()) {
-			savedGames.push_back(currentSave);
-		}
+		
+	}
+
+	if (!currentSave.playerName.empty()) {
+		savedGames.push_back(currentSave);
 	}
 
 	return savedGames;
 }
 
-int chooseSavedGames(const std::vector<savedStates>& savedGames) {
+void chooseSavedGames(const std::vector<savedStates>& savedGames) {
 	if (savedGames.empty()) {
-		return -1;
+		return;
 	}
 	for (int i = 0; i < savedGames.size(); ++i) {
 		std::cout << i + 1 << ". " << savedGames[i].playerName << std::endl;
 	}
-	int choice;
 
 	std::cout << "Choose Character: ";
-	std::cin >> choice;
 
-	if (choice < 1 || choice > savedGames.size()) {
-		std::cout << "Invalid choice. \n";
-		return -1;
-	}
-	return choice - 1;
+
+	return;
 }

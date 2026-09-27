@@ -4,30 +4,38 @@
 #include "CharacterCreation.h"
 #include "LoadSave.h"
 #include <iostream>
+#include "Controller.h"
 
 void PlayGame::gameOn() {
 	
 	GameState state;
-
+	Controller controller;
 	state.currentMode = GameMode::TitleScreen;
 
 	while (state.currentMode != GameMode::Exit) {
+
 		switch (state.currentMode) {
 		case GameMode::TitleScreen:
 		{
 			TitleScreen titleScreen;
-			int userNum = titleScreen.titlescreen();
-			if (userNum == 1) {
+			int userNum = 0;
+			titleScreen.titlescreen(userNum);
+			Input input = controller.readAction();
+			userNum = input.number;
+			
+
+			
+			if (input.number == 1) {
 				state.currentMode = GameMode::MainMenu;
 			}
-			else if (userNum == 2) {
+			else if (input.number == 2) {
 				state.currentMode = GameMode::Exit;
 			}
-			else if (userNum != 1 && userNum != 2){
-				state.currentMode = GameMode::TitleScreen;;
+			else if (input.number != 1 && input.number != 2){
+				state.currentMode = GameMode::TitleScreen;
 			}
 			
-			break;
+			break; 
 		}
 
 		case GameMode::MainMenu:
@@ -35,17 +43,20 @@ void PlayGame::gameOn() {
 			state.checkSavedState();
 			if (state.checkSavedState()) {
 				MainMenu mainMenu;
-				int userNum = mainMenu.menu();
-				if (userNum == 1) {
+				mainMenu.menu();
+
+				Input input = controller.readAction();
+
+				if (input.number == 1) {
 					state.currentMode = GameMode::CharacterCreation;
 				}
-				else if (userNum == 2) {
+				else if (input.number == 2) {
 					state.currentMode = GameMode::LoadSavedState;
 				}
-				else if (userNum == 3) {
+				else if (input.number == 3) {
 					state.currentMode = GameMode::Settings;
 				}
-				else if (userNum == 4) {
+				else if (input.number == 4) {
 					state.currentMode = GameMode::Exit;
 				}
 				else {
@@ -71,17 +82,26 @@ void PlayGame::gameOn() {
 
 		case GameMode::LoadSavedState: {
 			std::vector<savedStates> savedGames = loadSavedGames();
-			int choice = chooseSavedGames(savedGames);
+			chooseSavedGames(savedGames);
 
-			if (choice == -1) {
-				state.currentMode = GameMode::MainMenu;
-				break;
+			Input input = controller.readAction();
+
+			if (input.number == -1) {
+				int index = input.number - 1;
+
+				if (index >= 0 && index < static_cast<int>(savedGames.size())) {
+					const savedStates& selectedSave = savedGames[index];
+					player = Player(selectedSave.playerName);
+					state.currentMode = GameMode::Roaming;
+				}
+				else {
+					std::cout << "Invalid choice.\n";
+				}
 			}
 
-			savedStates selectedSave = savedGames[choice];
-			player = Player(selectedSave.playerName);
 			break;
 		}
+			
 			
 		
 		case GameMode::Settings:

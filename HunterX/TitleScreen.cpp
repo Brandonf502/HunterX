@@ -9,7 +9,9 @@ void TitleScreen::displayTitle(const std::vector<std::string>& title) {
 	}
 }
 
-int TitleScreen::titlescreen() {
+
+
+void TitleScreen::titlescreen(int userNum) {
 
 	std::string a = " ==== Hunter X ==== ";
 	std::string b = "   1. Play Game ";
@@ -21,11 +23,12 @@ int TitleScreen::titlescreen() {
 
 	int choiceOne = 1;
 	int choiceTwo = 2;
-	int userNum;
+	
+	
+	if (userNum == 0) {
+		displayTitle(title);
+	}
 
-	displayTitle(title);
-
-	std::cin >> userNum;
 
 	if (userNum == choiceOne) {
 		title.pop_back();
@@ -41,7 +44,7 @@ int TitleScreen::titlescreen() {
 		title.push_back(d);
 		displayTitle(title);
 	}
-	else if (userNum!=choiceOne && userNum!=choiceTwo) {
+	else if (userNum != choiceOne && userNum != choiceTwo && userNum != 0) {
 		title.pop_back();
 		title.pop_back();
 		title.pop_back();
@@ -49,7 +52,7 @@ int TitleScreen::titlescreen() {
 		displayTitle(title);
 		
 	}
-	return userNum;
+	return;
 }
 
 

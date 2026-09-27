@@ -9,4 +9,4 @@ struct savedStates {
 };
 
 std::vector<savedStates> loadSavedGames();
-int chooseSavedGames(const std::vector<savedStates>& savedGames);
+void chooseSavedGames(const std::vector<savedStates>& savedGames);
