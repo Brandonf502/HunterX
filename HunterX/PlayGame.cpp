@@ -80,7 +80,7 @@ void PlayGame::gameOn() {
 		{
 			Player player = createCharacter();
 			saveCharacter(player);
-			state.currentMode = GameMode::MainMenu;
+			state.currentMode = GameMode::Roaming;
 
 			break;
 		}
@@ -88,20 +88,25 @@ void PlayGame::gameOn() {
 		case GameMode::LoadSavedState: {
 			std::vector<savedStates> savedGames = loadSavedGames();
 			chooseSavedGames(savedGames);
+			bool playerSelected = false;
 
 			Input input = controller.readAction();
 
-			if (input.number == -1) {
+			if (input.number) {
 				int index = input.number - 1;
 
 				if (index >= 0 && index < static_cast<int>(savedGames.size())) {
 					const savedStates& selectedSave = savedGames[index];
 					player = Player(selectedSave.playerName);
-					state.currentMode = GameMode::Roaming;
+					playerSelected = true;
 				}
 				else {
 					std::cout << "Invalid choice.\n";
 				}
+			}
+			if (playerSelected) {
+				state.currentMode = GameMode::Roaming;
+				playerSelected = false;
 			}
 
 			break;
@@ -114,7 +119,7 @@ void PlayGame::gameOn() {
 			break;
 
 		case GameMode::Roaming:
-			// Handle roaming logic
+			std::cout << "Roaming... " << std::endl;
 			break;
 
 		case GameMode::Battle:

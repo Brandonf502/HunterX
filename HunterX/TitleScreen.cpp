@@ -1,4 +1,5 @@
 #include "TitleScreen.h"
+#include "TypeWrite.h"
 #include <iostream>
 #include <vector>
 #include <Windows.h>
@@ -7,7 +8,7 @@
 void TitleScreen::displayTitle(const std::vector<std::string>& title) {
 
 	for (const std::string& line : title) {
-		std::cout << line << std::endl;
+		typeWrite(line);
 	}
 }
 

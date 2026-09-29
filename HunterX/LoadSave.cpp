@@ -1,4 +1,5 @@
 #include "LoadSave.h"
+#include "TypeWrite.h"
 #include <fstream>
 #include <iostream>
 
@@ -49,7 +50,7 @@ void chooseSavedGames(const std::vector<savedStates>& savedGames) {
 		std::cout << i + 1 << ". " << savedGames[i].playerName << std::endl;
 	}
 
-	std::cout << "Choose Character: ";
+	typeWrite("Choose Character: ");
 
 
 	return;

@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "TypeWrite.h"
 #include <fstream>
 #include <vector>
 #include <string>
@@ -7,7 +8,7 @@
 void MainMenu::displayMenu(const std::vector<std::string>& menuOptions) {
 
 	for (const std::string& line : menuOptions) {
-		std::cout << line << std::endl;
+		typeWrite(line);
 	}
 
 }

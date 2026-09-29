@@ -1,2 +1,2 @@
-playerName=Gon
+playerName=B'
 currentHealth=100

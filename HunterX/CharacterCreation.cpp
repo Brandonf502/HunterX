@@ -1,4 +1,5 @@
 #include "CharacterCreation.h"
+#include "TypeWrite.h"
 #include <iostream>
 #include <fstream>
 
@@ -19,7 +20,7 @@ bool saveCharacter(const Player& player) {
 }
 
 Player createCharacter() {
-	std::cout << "Enter your character's name: ";
+	typeWrite("Enter your character's name: ");
 	std::string playerName;
 
 	std::cin >> playerName;

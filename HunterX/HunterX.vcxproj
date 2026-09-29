@@ -139,24 +139,32 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Area.cpp" />
     <ClCompile Include="CharacterCreation.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="HunterX.cpp" />
     <ClCompile Include="LoadSave.cpp" />
+    <ClCompile Include="Location.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player.h" />
     <ClCompile Include="PlayGame.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
+    <ClCompile Include="TypeWrite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Area.h" />
     <ClInclude Include="CharacterCreation.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="LoadSave.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="PlayGame.h" />
     <ClInclude Include="TitleScreen.h" />
+    <ClInclude Include="TypeWrite.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SavedData.txt" />
