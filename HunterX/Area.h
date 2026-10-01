@@ -1,9 +1,14 @@
 #pragma once
+#include "Location.h"
+#include <iostream>
+#include <vector>
 
 class Area {
-	Area* north = nullptr;
-	Area* south = nullptr;
-	Area* west = nullptr;
-	Area* east = nullptr;
-	Area();
+public:
+	std::string name;
+	std::vector<Location> locations;
+	Area* next = nullptr;
+	Area* previous = nullptr;
+
+	Area(const std::string& areaName);
 };
