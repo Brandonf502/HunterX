@@ -12,6 +12,9 @@ void PlayGame::gameOn() {
 	GameState state;
 	Controller controller;
 	state.currentMode = GameMode::TitleScreen;
+	map.buildMap();
+	
+	
 
 	while (state.currentMode != GameMode::Exit) {
 		system("cls");
@@ -78,7 +81,8 @@ void PlayGame::gameOn() {
 
 		case GameMode::CharacterCreation:
 		{
-			Player player = createCharacter();
+			player = createCharacter();
+			player.setCurrentLocation(map.getStartingLocation());
 			saveCharacter(player);
 			state.currentMode = GameMode::Roaming;
 
@@ -105,6 +109,7 @@ void PlayGame::gameOn() {
 				}
 			}
 			if (playerSelected) {
+				player.setCurrentLocation(map.getStartingLocation());
 				state.currentMode = GameMode::Roaming;
 				playerSelected = false;
 			}
@@ -120,6 +125,7 @@ void PlayGame::gameOn() {
 
 		case GameMode::Roaming:
 			std::cout << "Roaming... " << std::endl;
+			std::cout << player.getCurrentLocation()->getName() << std::endl;
 			break;
 
 		case GameMode::Battle:

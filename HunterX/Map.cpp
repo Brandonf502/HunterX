@@ -2,31 +2,40 @@
 #include "Location.h"
 #include "Area.h"
 
-Map Map::buildMap() {
+void Map::buildMap() {
 
-	Area whaleIsland("Whale Island");
+	areas.reserve(3);
+	areas.emplace_back("Whale Island");
+	Area& whaleIsland = areas.back();
+	whaleIsland.locations.reserve(13);
 
-	Location Forest("Forest");
-	Location mitoHouse("Mito's House");
-	Location swamp("Swamp");
-	Location river("River");
-	Location portTown("Port Town");
-	Location portDock("Port Dock");
-	Location northBorder("North");
-	Location eastBorder("East");
-	Location southBorder("South");
-	Location westBorder("West");
+	whaleIsland.locations.emplace_back("Forest");
+	whaleIsland.locations.emplace_back("West Forest");
+	whaleIsland.locations.emplace_back("East Forest");
+	whaleIsland.locations.emplace_back("South Forest");
+	whaleIsland.locations.emplace_back("Mito's House");
+	whaleIsland.locations.emplace_back("Swamp");
+	whaleIsland.locations.emplace_back("River");
+	whaleIsland.locations.emplace_back("Port Town");
+	whaleIsland.locations.emplace_back("Port Dock");
+	whaleIsland.locations.emplace_back("North");
+	whaleIsland.locations.emplace_back("East");
+	whaleIsland.locations.emplace_back("South");
+	whaleIsland.locations.emplace_back("West");
 
-	whaleIsland.locations.push_back(Forest);
-	whaleIsland.locations.push_back(mitoHouse);
-	whaleIsland.locations.push_back(swamp);
-	whaleIsland.locations.push_back(river);
-	whaleIsland.locations.push_back(portTown);
-	whaleIsland.locations.push_back(portDock);
-	whaleIsland.locations.push_back(northBorder);
-	whaleIsland.locations.push_back(eastBorder);
-	whaleIsland.locations.push_back(southBorder);
-	whaleIsland.locations.push_back(westBorder);
+	Location& Forest = whaleIsland.locations[0];
+	Location& westForest = whaleIsland.locations[1];
+	Location& eastForest = whaleIsland.locations[2];
+	Location& southForest = whaleIsland.locations[3];
+	Location& mitoHouse = whaleIsland.locations[4];
+	Location& swamp = whaleIsland.locations[5];
+	Location& river = whaleIsland.locations[6];
+	Location& portTown = whaleIsland.locations[7];
+	Location& portDock = whaleIsland.locations[8];
+	Location& northBorder = whaleIsland.locations[9];
+	Location& eastBorder = whaleIsland.locations[10];
+	Location& southBorder = whaleIsland.locations[11];
+	Location& westBorder = whaleIsland.locations[12];
 
 	Forest.north = &mitoHouse;
 	Forest.east = &swamp;
@@ -34,12 +43,12 @@ Map Map::buildMap() {
 	Forest.west = &river;
 
 	mitoHouse.north = &northBorder;
-	mitoHouse.east = &eastBorder;
+	mitoHouse.east = &eastForest;
 	mitoHouse.south = &Forest;
 	mitoHouse.west = &river;
 
 	portTown.north = &Forest;
-	portTown.east = &Forest;
+	portTown.east = &southForest;
 	portTown.south = &portDock;
 	portTown.west = &river;
 
@@ -48,29 +57,20 @@ Map Map::buildMap() {
 	portDock.south = &southBorder;
 	portDock.west = &westBorder;
 
-	swamp.north = &northBorder;
+	swamp.north = &eastForest;
 	swamp.east = &eastBorder;
-	swamp.south = &Forest;
+	swamp.south = &portTown;
 	swamp.west = &Forest;
 
-
-
-
-	Map map;
-
-	map.northBorder = &northBorder;
-	map.eastBorder = &eastBorder;
-	map.southBorder = &southBorder;
-	map.westBorder = &westBorder;
-	map.areas.push_back(whaleIsland);
-
-	map.first = &whaleIsland;
+	this->northBorder = &northBorder;
+	this->eastBorder = &eastBorder;
+	this->southBorder = &southBorder;
+	this->westBorder = &westBorder;
 	
 
+	this->first = &areas[0];
+}
 
-
-
-
-
-
+Location* Map::getStartingLocation() {
+	return &areas[0].locations[4];
 }

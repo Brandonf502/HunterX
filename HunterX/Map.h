@@ -1,8 +1,12 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "Area.h"
+#include "Location.h"
+
 
 class Map {
+private:
 	std::string worldMap = "World Map";
 	std::vector<Area> areas;
 	Location* northBorder = nullptr;
@@ -11,7 +15,9 @@ class Map {
 	Location* westBorder = nullptr;
 	Area* first = nullptr;
 	Area* last = nullptr;
-	 
-	static Map buildMap();
+
+public: 
+	Location* getStartingLocation();
+	void buildMap();
 	
 };
