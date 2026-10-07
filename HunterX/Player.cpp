@@ -12,6 +12,7 @@ Player::Player(const std::string& playerName) {
 	name = playerName;
 	health = 100;
 	currentLocation = nullptr;
+	currentArea = nullptr;
 }
 
 void Player::setCurrentLocation(Location* location) {
@@ -20,6 +21,11 @@ void Player::setCurrentLocation(Location* location) {
 
 Location* Player::getCurrentLocation() const {
 	return currentLocation;
+}
+
+Area* Player::getCurrentArea(Location* location) {
+	currentArea = location->getArea();
+	return currentArea;
 }
 
 std::string Player::getName() const {

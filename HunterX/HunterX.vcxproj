@@ -150,6 +150,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player.h" />
     <ClCompile Include="PlayGame.cpp" />
+    <ClCompile Include="Roaming.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="TypeWrite.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="PlayGame.h" />
+    <ClInclude Include="Roaming.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="TypeWrite.h" />
   </ItemGroup>

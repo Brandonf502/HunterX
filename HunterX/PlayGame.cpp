@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "Controller.h"
+#include "Roaming.h"
 
 void PlayGame::gameOn() {
 	
@@ -123,10 +124,32 @@ void PlayGame::gameOn() {
 			// Handle settings logic
 			break;
 
-		case GameMode::Roaming:
-			std::cout << "Roaming... " << std::endl;
-			std::cout << player.getCurrentLocation()->getName() << std::endl;
+		case GameMode::Roaming: {
+			AreaState roaming;
+			Area* currentArea = nullptr; 
+			while (state.currentMode == GameMode::Roaming) {
+				if (currentArea == nullptr) {
+					player.setCurrentLocation(map.getStartingLocation());
+					currentArea = player.getCurrentArea(player.getCurrentLocation());
+				}
+
+				else if (currentArea != nullptr) {
+					std::string currentAreaName = currentArea->name;
+					if (currentAreaName == "Whale Island") {
+						roaming.currentArea = Roaming::WhaleIsland;
+					}
+					else if (currentAreaName == "Heavens Arena") {
+						roaming.currentArea = Roaming::HeavensArena;
+					}
+					else if (currentAreaName == "Greed Island") {
+						roaming.currentArea = Roaming::GreedIsland;
+					}
+					roaming.roam();
+				}
+					
+			}
 			break;
+		}
 
 		case GameMode::Battle:
 			// Handle battle logic
