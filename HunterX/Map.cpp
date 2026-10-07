@@ -37,12 +37,28 @@ void Map::buildMap() {
 	Location& southBorder = whaleIsland.locations[11];
 	Location& westBorder = whaleIsland.locations[12];
 
+	northBorder.setArea(&whaleIsland);
+	eastBorder.setArea(&whaleIsland);
+	southBorder.setArea(&whaleIsland);
+	westBorder.setArea(&whaleIsland);
+
 	Forest.north = &mitoHouse;
 	Forest.east = &swamp;
 	Forest.south = &portTown;
 	Forest.west = &river;
 	Forest.setArea(&whaleIsland);
-	
+
+	eastForest.north = &northBorder;
+	eastForest.east = &eastBorder;
+	eastForest.south = &swamp;
+	eastForest.west = &mitoHouse;
+	eastForest.setArea(&whaleIsland);
+
+	westForest.north = &northBorder;
+	westForest.east = &river;
+	westForest.south = &portTown;
+	westForest.west = &westBorder;
+	westForest.setArea(&whaleIsland);
 
 	mitoHouse.north = &northBorder;
 	mitoHouse.east = &eastForest;
@@ -68,6 +84,12 @@ void Map::buildMap() {
 	swamp.south = &portTown;
 	swamp.west = &Forest;
 	swamp.setArea(&whaleIsland);
+
+	river.north = &mitoHouse;
+	river.east = &Forest;
+	river.south = &portTown;
+	river.west = &westForest;
+	river.setArea(&whaleIsland);
 
 	this->northBorder = &northBorder;
 	this->eastBorder = &eastBorder;

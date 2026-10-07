@@ -153,6 +153,7 @@
     <ClCompile Include="Roaming.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="TypeWrite.cpp" />
+    <ClCompile Include="WhaleIsland.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Area.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Roaming.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="TypeWrite.h" />
+    <ClInclude Include="WhaleIsland.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SavedData.txt" />

@@ -126,27 +126,28 @@ void PlayGame::gameOn() {
 
 		case GameMode::Roaming: {
 			AreaState roaming;
-			Area* currentArea = nullptr; 
 			while (state.currentMode == GameMode::Roaming) {
+				Area* currentArea = player.getCurrentArea(player.getCurrentLocation());
 				if (currentArea == nullptr) {
-					player.setCurrentLocation(map.getStartingLocation());
-					currentArea = player.getCurrentArea(player.getCurrentLocation());
-				}
+					std::cout << "ERROR: Current location has no Area!\n";
+					std::cout << "Location: "
+						<< player.getCurrentLocation()->getName()
+						<< '\n';
 
-				else if (currentArea != nullptr) {
-					std::string currentAreaName = currentArea->name;
-					if (currentAreaName == "Whale Island") {
-						roaming.currentArea = Roaming::WhaleIsland;
-					}
-					else if (currentAreaName == "Heavens Arena") {
-						roaming.currentArea = Roaming::HeavensArena;
-					}
-					else if (currentAreaName == "Greed Island") {
-						roaming.currentArea = Roaming::GreedIsland;
-					}
-					roaming.roam();
+					break;
 				}
-					
+				std::string currentAreaName = currentArea->name;
+
+				if (currentAreaName == "Whale Island") {
+					roaming.currentArea = Roaming::WhaleIsland;
+				}
+				else if (currentAreaName == "Heavens Arena") {
+					roaming.currentArea = Roaming::HeavensArena;
+				}
+				else if (currentAreaName == "Greed Island") {
+					roaming.currentArea = Roaming::GreedIsland;
+				}
+				roaming.roam(player);
 			}
 			break;
 		}

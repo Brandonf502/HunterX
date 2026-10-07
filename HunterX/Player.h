@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Location.h"
+#include "Area.h"
 
 class Location;
 class Area;

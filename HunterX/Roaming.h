@@ -6,7 +6,8 @@ enum class Roaming {
 	GreedIsland,
 };
 
+class Player;
 struct AreaState {
 	Roaming currentArea;
-	void roam();
+	void roam(Player& player);
 };
