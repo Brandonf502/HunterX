@@ -7,48 +7,46 @@
 #include <cstdlib>
 #include "Controller.h"
 #include "Roaming.h"
+#include "PlayerRequest.h"
 
 void PlayGame::gameOn() {
-	
+
 	GameState state;
 	Controller controller;
-	state.currentMode = GameMode::TitleScreen;
 	map.buildMap();
-	
-	
+
+
 
 	while (state.currentMode != GameMode::Exit) {
 		system("cls");
 
 		switch (state.currentMode) {
-		case GameMode::TitleScreen:
-		{
+		case GameMode::TitleScreen: {
 			TitleScreen titleScreen;
 			int userNum = 0;
 			titleScreen.titlescreen(userNum);
 			Input input = controller.readAction();
-			
-			
+
+
 			if (userNum == 0) {
 				userNum = input.number;
 				titleScreen.titlescreen(userNum);
 			}
-			
+
 			if (input.number == 1) {
 				state.currentMode = GameMode::MainMenu;
 			}
 			else if (input.number == 2) {
 				state.currentMode = GameMode::Exit;
 			}
-			else if (input.number != 1 && input.number != 2){
+			else if (input.number != 1 && input.number != 2) {
 				state.currentMode = GameMode::TitleScreen;
 			}
-			
-			break; 
+
+			break;
 		}
 
-		case GameMode::MainMenu:
-		{
+		case GameMode::MainMenu: {
 			state.checkSavedState();
 			if (state.checkSavedState()) {
 				MainMenu mainMenu;
@@ -80,8 +78,7 @@ void PlayGame::gameOn() {
 			break;
 		}
 
-		case GameMode::CharacterCreation:
-		{
+		case GameMode::CharacterCreation: {
 			player = createCharacter();
 			player.setCurrentLocation(map.getStartingLocation());
 			saveCharacter(player);
@@ -117,9 +114,9 @@ void PlayGame::gameOn() {
 
 			break;
 		}
-			
-			
-		
+
+
+
 		case GameMode::Settings:
 			// Handle settings logic
 			break;
@@ -148,7 +145,37 @@ void PlayGame::gameOn() {
 					roaming.currentArea = Roaming::GreedIsland;
 				}
 				roaming.roam(player);
+
+				switch (roaming.playerRequest) {
+				case PlayerRequest::Inventory: {
+					state.previousMode = state.currentMode;
+					state.currentMode = GameMode::Inventory;
+					roaming.playerRequest = PlayerRequest::None;
+					break;
+				}
+				case PlayerRequest::Map: {
+					state.previousMode = state.currentMode;
+					state.currentMode = GameMode::Map;
+					roaming.playerRequest = PlayerRequest::None;
+					break;
+				}
+				case PlayerRequest::Stats: {
+					state.previousMode = state.currentMode;
+					state.currentMode = GameMode::Stats;
+					roaming.playerRequest = PlayerRequest::None;
+					break;
+				}
+				case PlayerRequest::None: {
+					break;
+				}
+				}
+				
 			}
+			break;
+		}
+
+		case GameMode::Map: {
+			std::cout << "======== Map ========\n";
 			break;
 		}
 
@@ -172,13 +199,14 @@ void PlayGame::gameOn() {
 			// Handle death logic
 			break;
 
-		default:
+		default: {
 			state.currentMode = GameMode::Exit; // Exit the game if an unknown mode is encountered
 			break;
 		}
+		}
 	}
-
-	
 }
+
+
 
 

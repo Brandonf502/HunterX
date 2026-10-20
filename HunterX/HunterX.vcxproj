@@ -164,6 +164,7 @@
     <ClInclude Include="Location.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="PlayerRequest.h" />
     <ClInclude Include="PlayGame.h" />
     <ClInclude Include="Roaming.h" />
     <ClInclude Include="TitleScreen.h" />

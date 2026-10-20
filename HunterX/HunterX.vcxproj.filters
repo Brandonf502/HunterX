@@ -101,6 +101,9 @@
     <ClInclude Include="WhaleIsland.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="SavedData.txt" />

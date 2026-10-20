@@ -19,5 +19,6 @@ private:
 public: 
 	Location* getStartingLocation();
 	void buildMap();
+	void displayMap();
 	
 };

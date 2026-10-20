@@ -4,9 +4,11 @@
 #include "WhaleIsland.h"
 #include "Player.h"
 #include "Area.h"
+#include "PlayerRequest.h"
 #include <cstdlib>
 
 void AreaState::roam(Player& player) {
+	playerRequest = PlayerRequest::None;
 	switch (currentArea) {
 	case Roaming::WhaleIsland: {
 		system("cls");
@@ -17,6 +19,19 @@ void AreaState::roam(Player& player) {
 		Area* playerArea = player.getCurrentArea(player.getCurrentLocation());
 		WhaleIsland whaleIsland(playerArea);
 		whaleIsland.movement(player, input);
+
+		if (input.action == Action::Inventory) {
+			playerRequest = PlayerRequest::Inventory;
+		}
+		else if (input.action == Action::Map) {
+			playerRequest = PlayerRequest::Map;
+		}
+		else if (input.action == Action::Menu) {
+			playerRequest = PlayerRequest::Stats;
+		}
+		else if (input.action == Action::Exit) {
+			exit(0);
+		}
 		
 		break;
 	}

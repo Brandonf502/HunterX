@@ -11,6 +11,7 @@ enum class GameMode {
 	Roaming,
 	Battle,
 	Inventory,
+	Map,
 	Narrating,
 	Stats,
 	Death,
@@ -21,6 +22,7 @@ enum class GameMode {
 struct GameState {
 
 	GameMode currentMode = GameMode::TitleScreen;
+	GameMode previousMode = GameMode::TitleScreen;
 	bool savedGameExists = false;
 
 	bool checkSavedState() {
