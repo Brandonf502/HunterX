@@ -2,7 +2,8 @@
 
 enum class Action {
 	North, East, South, West,
-	Inventory, Menu, Exit, Number, Map, None
+	Inventory, Menu, Exit, Number,
+	Map, Enter, Back, None
 };
 
 struct Input {
