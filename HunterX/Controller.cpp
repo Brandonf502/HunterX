@@ -36,10 +36,10 @@ Input Controller::readAction() {
 	}
 
 	if (key == 13) {
-		return {Action::Enter, 0}
+		return {Action::Enter, 0};
 	}
 	if (key == 8) {
-		return {Action::Back, 0}
+		return {Action::Back, 0};
 	}
 	return { Action::None, 0 };
 }

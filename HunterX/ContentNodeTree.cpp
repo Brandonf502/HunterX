@@ -22,6 +22,7 @@ void ContentNodeTree::displayCurrentNode() {
 }
 
 Input ContentNodeTree::getAction() {
+    Controller controller;
     return controller.readAction();
 }
 
