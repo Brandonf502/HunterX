@@ -11,7 +11,7 @@ void AreaState::roam(Player& player) {
 	playerRequest = PlayerRequest::None;
 	switch (currentArea) {
 	case Roaming::WhaleIsland: {
-		system("cls");
+		clearScreen();
 		typeWrite("======== Whale Island ========\n");
 		std::string location = player.getCurrentLocation()->getName();
 		typeWrite("    ==== " + location + " ====    \n");

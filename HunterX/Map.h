@@ -3,8 +3,10 @@
 #include <vector>
 #include "Area.h"
 #include "Location.h"
+#include "Player.h"
+#include "Controller.h"
 
-
+class Player;
 class Map {
 private:
 	std::string worldMap = "World Map";
@@ -19,6 +21,6 @@ private:
 public: 
 	Location* getStartingLocation();
 	void buildMap();
-	void displayMap();
+	void displayMap(Player& player);
 	
 };

@@ -34,7 +34,7 @@ void TitleScreen::titlescreen(int userNum) {
 
 
 	if (userNum == choiceOne) {
-		system("cls");
+		clearScreen();
 		title.pop_back();
 		title.pop_back();
 		title.push_back(e);
@@ -43,7 +43,7 @@ void TitleScreen::titlescreen(int userNum) {
 		
 	}
 	else if (userNum == choiceTwo) {
-		system("cls");
+		clearScreen();
 		title.pop_back();
 		title.pop_back();
 		title.pop_back();
@@ -52,7 +52,7 @@ void TitleScreen::titlescreen(int userNum) {
 		Sleep(1200);
 	}
 	else if (userNum != choiceOne && userNum != choiceTwo && userNum != 0) {
-		system("cls");
+		clearScreen();
 		title.pop_back();
 		title.pop_back();
 		title.pop_back();

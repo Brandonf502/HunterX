@@ -1,12 +1,31 @@
 #include "Map.h"
 #include "Location.h"
 #include "Area.h"
+#include "Controller.h"
+#include "Player.h"
+#include "TypeWrite.h"
 
 void Map::buildMap() {
 
 	areas.reserve(3);
 	areas.emplace_back("Whale Island");
 	Area& whaleIsland = areas.back();
+
+
+	areas.emplace_back("Heaven's Arena");
+	Area& heavensArena = areas.back();
+
+	areas.emplace_back("Greed Island");
+	Area& greedIsland = areas.back();
+
+	whaleIsland.next = &heavensArena;
+	whaleIsland.previous = &greedIsland;
+	heavensArena.next = &greedIsland;
+	heavensArena.previous = &whaleIsland;
+	greedIsland.next = &whaleIsland;
+	greedIsland.previous = &heavensArena;
+
+
 	whaleIsland.locations.reserve(15);
 
 	whaleIsland.locations.emplace_back("Forest");
@@ -124,4 +143,26 @@ void Map::buildMap() {
 
 Location* Map::getStartingLocation() {
 	return &areas[0].locations[4];
+}
+
+
+void Map::displayMap(Player& player) {
+	Area* currentArea = player.getCurrentArea(player.getCurrentLocation());
+	bool viewingMap = true;
+	while (viewingMap) {
+		clearScreen();
+		std::cout << "======== Map ========\n";
+		std::cout << currentArea->name << std::endl;
+		Input input = Controller().readAction();
+		if (input.action == Action::East) {
+			currentArea = currentArea->next;
+
+		}
+		if (input.action == Action::West) {
+			currentArea = currentArea->previous;
+		}
+		else if (input.action == Action::Map) {
+			viewingMap = false;
+		}
+	}
 }

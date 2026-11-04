@@ -8,6 +8,8 @@
 #include "Controller.h"
 #include "Roaming.h"
 #include "PlayerRequest.h"
+#include "Player.h"
+#include "TypeWrite.h"
 
 void PlayGame::gameOn() {
 
@@ -18,7 +20,7 @@ void PlayGame::gameOn() {
 
 
 	while (state.currentMode != GameMode::Exit) {
-		system("cls");
+		clearScreen();
 
 		switch (state.currentMode) {
 		case GameMode::TitleScreen: {
@@ -175,7 +177,9 @@ void PlayGame::gameOn() {
 		}
 
 		case GameMode::Map: {
-			std::cout << "======== Map ========\n";
+			class Player;
+			map.displayMap(player);
+			state.currentMode = state.previousMode;
 			break;
 		}
 

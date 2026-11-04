@@ -11,3 +11,7 @@ void typeWrite(const std::string& letters) {
 	}
 	std::cout << std::endl;
 }
+
+void clearScreen() {
+	std::cout << "\x1B[2J\x1B[H" << std::flush;
+}
