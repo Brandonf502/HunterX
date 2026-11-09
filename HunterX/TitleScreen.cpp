@@ -2,7 +2,8 @@
 #include "TypeWrite.h"
 #include <iostream>
 #include <vector>
-#include <Windows.h>
+#include <thread>
+#include <chrono>
 #include <cstdlib>
 
 void TitleScreen::displayTitle(const std::vector<std::string>& title) {
@@ -39,7 +40,7 @@ void TitleScreen::titlescreen(int userNum) {
 		title.pop_back();
 		title.push_back(e);
 		displayTitle(title);
-		Sleep(1200);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1200));
 		
 	}
 	else if (userNum == choiceTwo) {
@@ -49,7 +50,7 @@ void TitleScreen::titlescreen(int userNum) {
 		title.pop_back();
 		title.push_back(d);
 		displayTitle(title);
-		Sleep(1200);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1200));
 	}
 	else if (userNum != choiceOne && userNum != choiceTwo && userNum != 0) {
 		clearScreen();
@@ -58,10 +59,8 @@ void TitleScreen::titlescreen(int userNum) {
 		title.pop_back();
 		title.push_back(f);
 		displayTitle(title);
-		Sleep(1200);
-		
+		std::this_thread::sleep_for(std::chrono::milliseconds(1200));
 	}
-	return;
 }
 
 

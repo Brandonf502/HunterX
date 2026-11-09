@@ -21,6 +21,8 @@ add_executable(HunterX
         HunterX/ContentNode.cpp
         HunterX/ContentNodeTree.h
         HunterX/ContentNodeTree.cpp
+        HunterX/Platform.h
+        HunterX/Platform.cpp
 )
 
 target_compile_features(HunterX PRIVATE cxx_std_20)

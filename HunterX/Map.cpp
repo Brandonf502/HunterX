@@ -1,4 +1,7 @@
 #include "Map.h"
+
+#include <format>
+
 #include "Location.h"
 #include "Area.h"
 #include "Controller.h"
@@ -60,77 +63,93 @@ void Map::buildMap() {
 	Location& southBorder = whaleIsland.locations[13];
 	Location& westBorder = whaleIsland.locations[14];
 
+	mitoHouse.setCoordinates({0,1});
+	Forest.setCoordinates({0,0});
+	portTown.setCoordinates({0,-1});
+	portDock.setCoordinates({0,-2});
+
+	northRiver.setCoordinates({-1,1});
+	river.setCoordinates({-1,0});
+	southRiver.setCoordinates({-1,-1});
+
+	westForest.setCoordinates({-2,0});
+
+	eastForest.setCoordinates({1,1});
+	swamp.setCoordinates({1,0});
+	southForest.setCoordinates({1,-1});
+
+
 	northBorder.setArea(&whaleIsland);
 	eastBorder.setArea(&whaleIsland);
 	southBorder.setArea(&whaleIsland);
 	westBorder.setArea(&whaleIsland);
 
-	Forest.north = &mitoHouse;
-	Forest.east = &swamp;
-	Forest.south = &portTown;
-	Forest.west = &river;
+
 	Forest.setArea(&whaleIsland);
+	Forest.setNorth(&mitoHouse);
+	Forest.setEast(&swamp);
+	Forest.setSouth(&portTown);
+	Forest.setWest(&river);
 
-	eastForest.north = &northBorder;
-	eastForest.east = &eastBorder;
-	eastForest.south = &swamp;
-	eastForest.west = &mitoHouse;
 	eastForest.setArea(&whaleIsland);
+	eastForest.setNorth(&northBorder);
+	eastForest.setEast(&eastBorder);
+	eastForest.setSouth(&swamp);
+	eastForest.setWest(&mitoHouse);
 
-	westForest.north = &northRiver;
-	westForest.east = &river;
-	westForest.south = &southRiver;;
-	westForest.west = &westBorder;
 	westForest.setArea(&whaleIsland);
+	westForest.setNorth(&northRiver);
+	westForest.setEast(&river);
+	westForest.setSouth(&southRiver);
+	westForest.setWest(&westBorder);
 
-	southForest.north = &swamp;
-	southForest.east = &eastBorder;
-	southForest.south = &southBorder;
-	southForest.west = &portTown;
 	southForest.setArea(&whaleIsland);
+	southForest.setNorth(&swamp);
+	southForest.setEast(&eastBorder);
+	southForest.setSouth(&southBorder);
+	southForest.setWest(&portTown);
 
-	mitoHouse.north = &northBorder;
-	mitoHouse.east = &eastForest;
-	mitoHouse.south = &Forest;
-	mitoHouse.west = &northRiver;
 	mitoHouse.setArea(&whaleIsland);
+	mitoHouse.setNorth(&northBorder);
+	mitoHouse.setEast(&eastForest);
+	mitoHouse.setSouth(&Forest);
+	mitoHouse.setWest(&northRiver);
 
-	portTown.north = &Forest;
-	portTown.east = &southForest;
-	portTown.south = &portDock;
-	portTown.west = &southRiver;
 	portTown.setArea(&whaleIsland);
+	portTown.setNorth(&Forest);
+	portTown.setEast(&southForest);
+	portTown.setSouth(&portDock);
+	portTown.setWest(&southRiver);
 
-	portDock.north = &portTown;
-	portDock.east = &eastBorder;
-	portDock.south = &southBorder;
-	portDock.west = &westBorder;
 	portDock.setArea(&whaleIsland);
-	
+	portDock.setNorth(&portTown);
+	portDock.setEast(&eastBorder);
+	portDock.setSouth(&southBorder);
+	portDock.setWest(&westBorder);
 
-	swamp.north = &eastForest;
-	swamp.east = &eastBorder;
-	swamp.south = &southForest;
-	swamp.west = &Forest;
 	swamp.setArea(&whaleIsland);
+	swamp.setNorth(&eastForest);
+	swamp.setEast(&eastBorder);
+	swamp.setSouth(&southForest);
+	swamp.setWest(&Forest);
 
-	northRiver.north = &northBorder;
-	northRiver.east = &mitoHouse;
-	northRiver.south = &river;
-	northRiver.west = &westForest;
 	northRiver.setArea(&whaleIsland);
+	northRiver.setNorth(&northBorder);
+	northRiver.setEast(&mitoHouse);
+	northRiver.setSouth(&river);
+	northRiver.setWest(&westForest);
 
-	river.north = &northRiver;
-	river.east = &Forest;
-	river.south = &southRiver;
-	river.west = &westForest;
 	river.setArea(&whaleIsland);
+	river.setNorth(&northRiver);
+	river.setEast(&Forest);
+	river.setSouth(&southRiver);
+	river.setWest(&westForest);
 
-	southRiver.north = &river;
-	southRiver.east = &portTown;
-	southRiver.south = &southBorder;
-	southRiver.west = &westForest;
 	southRiver.setArea(&whaleIsland);
+	southRiver.setNorth(&river);
+	southRiver.setEast(&portTown);
+	southRiver.setSouth(&southBorder);
+	southRiver.setWest(&westForest);
 
 	this->northBorder = &northBorder;
 	this->eastBorder = &eastBorder;
@@ -145,24 +164,208 @@ Location* Map::getStartingLocation() {
 	return &areas[0].locations[4];
 }
 
+Map::gridBoundaries Map::getGridBoundaries(Area& area) {
+	int maxX;
+	int maxY;
+	int minY;
+	int minX;
+	std::vector<Location>& locations = area.getLocations();
+	Map::gridBoundaries boundaries{};
+
+	bool bounds = false;
+	for (const Location& location : locations) {
+		if (location.isBorder()) {
+			continue;
+		}
+
+		Location::Coordinates position = location.getCoordinates();
+
+		if (!bounds) {
+			maxX = position.x;
+			maxY = position.y;
+			minX = position.x;
+			minY = position.y;
+			bounds = true;
+		}
+
+		if (position.x > maxX) {
+			maxX = position.x;
+		}
+		if (position.x < minX) {
+			minX = position.x;
+		}
+		if (position.y > maxY) {
+			maxY = position.y;
+		}
+		if (position.y < minY) {
+			minY = position.y;
+		}
+	}
+
+	if (locations.empty()) {
+		std::cout << "No locations found." << std::endl;
+	}
+	else {
+		boundaries.minimum.x = minX;
+		boundaries.minimum.y = minY;
+
+		boundaries.maximum.x = maxX;
+		boundaries.maximum.y = maxY;
+	}
+
+
+	return boundaries;
+}
+
+std::vector<std::string> Map::canvas(int width,int height) {
+	std::vector<std::string> canvas;
+
+
+	for (int i = 0; i < height; i++) {
+		canvas.emplace_back(std::string(width, ' '));
+	}
+
+	return canvas;
+}
+
+void Map::drawLocations(std::vector<std::string>& blueprint, Area& area, gridBoundaries boundaries) {
+	std::vector<Location>& locations = area.getLocations();
+
+	for (Location& location : locations) {
+		if (location.isBorder()) {
+			continue;
+		}
+		else {
+			Location::Coordinates position = location.getCoordinates();
+			int column = position.x - boundaries.minimum.x;
+			int row = boundaries.maximum.y - position.y;
+			std::string name = location.getName();
+			for (std::size_t i = 0; i < name.size(); i++) {
+				blueprint[row][column + i] = name[i];
+			}
+		}
+	}
+}
+
 
 void Map::displayMap(Player& player) {
 	Area* currentArea = player.getCurrentArea(player.getCurrentLocation());
 	bool viewingMap = true;
+	int maxX;
+	int maxY;
+	int minX;
+	int minY;
 	while (viewingMap) {
 		clearScreen();
 		std::cout << "======== Map ========\n";
 		std::cout << currentArea->name << std::endl;
+		std::vector<Location>& locations = currentArea->getLocations();
+		bool bounds = false;
+		for (const Location& location : locations) {
+			bool isBorder = false;
+			isBorder = location.isBorder();
+			if (isBorder) {
+				continue;
+			}
+
+			Location::Coordinates position = location.getCoordinates();
+
+			if (!bounds) {
+				maxX = position.x;
+				maxY = position.y;
+				minX = position.x;
+				minY = position.y;
+				bounds = true;
+			}
+
+			if (position.x > maxX) {
+				maxX = position.x;
+			}
+			if (position.x < minX) {
+				minX = position.x;
+			}
+			if (position.y > maxY) {
+				maxY = position.y;
+			}
+			if (position.y < minY) {
+				minY = position.y;
+			}
+
+		}
+		for (int i = maxY; i >= minY; i--) {
+			for (int j = minX; j <= maxX; j++) {
+				bool foundLocation = false;
+				for (Location& location : locations) {
+					bool isBorder = false;
+					isBorder = location.isBorder();
+					if (isBorder) {
+						continue;
+					}
+					Location::Coordinates position = location.getCoordinates();
+					if (position.x == j && position.y == i) {
+						foundLocation = true;
+						std::cout << location.getName();
+						if (location.getEast() && !location.getEast()->isBorder()) {
+							std::cout << std::string(16 - location.getName().size(), '-');
+						}
+						else {
+							std::cout << std::string(16 - location.getName().size(), ' ');
+						}
+					}
+				}
+				if (!foundLocation) {
+					std::cout << std::string(16, ' ');
+				}
+			}
+			std::cout << std::endl;
+			for (int l = minX; l <= maxX; l++) {
+				bool found = false;
+				bool diagonal = false;
+				for (Location& location : locations) {
+					if (location.isBorder()) {
+						continue;
+					}
+					Location::Coordinates position = location.getCoordinates();
+					if (position.x == l && position.y == i) {
+						if (location.getSouth() && !location.getSouth()->isBorder()) {
+							found = true;
+							Location& thisLocation = location;
+							Location* southNeighbor = location.getSouth();
+							Location::Coordinates thisLocationpos = thisLocation.getCoordinates();
+							Location::Coordinates southNeighborpos = southNeighbor->getCoordinates();
+							diagonal = (
+								southNeighborpos.x == thisLocationpos.x &&
+								southNeighborpos.y == thisLocationpos.y - 1
+								);
+						}
+					}
+				}
+				if (found && !diagonal) {
+					std::cout << std::string(8, ' ') << "\\" << std::string(7, ' ');
+				}
+				else if (found && diagonal) {
+					std::cout << std::string(8, ' ') << "|" << std::string(7, ' ');
+				}
+				else {
+					std::cout << std::string(16, ' ');
+				}
+			}
+
+			std::cout << std::endl;
+		}
+
+
+
 		Input input = Controller().readAction();
 		if (input.action == Action::East) {
 			currentArea = currentArea->next;
-
 		}
-		if (input.action == Action::West) {
+		else if (input.action == Action::West) {
 			currentArea = currentArea->previous;
 		}
 		else if (input.action == Action::Map) {
 			viewingMap = false;
 		}
+
 	}
 }

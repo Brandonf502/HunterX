@@ -11,4 +11,5 @@ public:
 	Area* previous = nullptr;
 
 	Area(const std::string& areaName);
+	std::vector<Location>& getLocations();
 };
