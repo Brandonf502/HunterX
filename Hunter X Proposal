@@ -1,0 +1,64 @@
+Hunter x Hunter 
+DnD style Anime inspired text-based RPG
+Project Overview
+Hunter x Hunter is a limited, console-based role-playing game written entirely in C++. The player creates a character and enters a dangerous qualification trial inspired by adventure-anime themes. During the trial, the player explores connected locations, interacts with non-player characters (NPCs), collects and uses items, makes decisions, and completes a central objective.
+The program will use authored game rules and story content. An LLM-powered narrator may be considered as a future enhancement, but it will not be part of the submitted capstone.
+1. Project Description
+What Will the Program Do?
+The program will present an interactive story through the console. At the beginning, the user will enter a player name and receive basic character statistics. The game will then repeatedly display the current location, describe available actions, accept a numbered or text-based command, validate that command, and update the game state.
+Travel between logically connected locations.
+Examine locations and discover useful information.
+Speak with recurring NPCs.
+Roll dice for certain important decisions made throughout the story line
+Collect, inspect, and use inventory items.
+Encounter enemies and resolve limited turn-based combat.
+Make decisions that affect later events or relationships.
+Complete a main objective and reach a winning or losing ending.
+The scope will remain intentionally limited: a small connected world, a manageable cast, a limited inventory, one primary quest, and a few meaningful branches. This is large enough to demonstrate course concepts without becoming an unbounded game-development project.
+	Who Will Use the Program?
+The primary users are players who enjoy console-based interactive fiction, fantasy adventures, and decision-driven role-playing games. It may also appeal to beginning programming students who want to see how object-oriented programming and custom data structures support a complete application. No specialized hardware, account, or network connection will be required.
+
+How Will the Program Be Useful?
+For players, the program will provide a short replayable adventure in which exploration and decisions influence the outcome. Because the interface is text based, users can focus on the story, choices, and underlying systems without needing complex controls.
+As a capstone, the project will demonstrate how multiple programming concepts cooperate in one organized system. Instead of presenting isolated exercises, the game will apply classes, inheritance, polymorphism, recursion, sorting, and a custom graph to player movement, character behavior, inventory management, and story progression.
+What Data Will Be Required?
+Player data: name, current and maximum health, experience, inventory, and current location.
+Location data: identifier, name, description, exits, characters, items, and access requirements.
+Character data: name, health, role, dialogue identifiers, attitude, and active/defeated status.
+Item data: name, description, type, value, and effect.
+Quest data: objective, completion conditions, progress flags, and reward.
+World-state data: unlocked passages, completed events, defeated enemies, decisions, and win/loss status.
+The initial version can initialize this data within the C++ program. If local file input is later included, every required file will be packaged with the project; the program will not retrieve internet data or use a database.
+2. Proposed Program Structure
+Game: Controls the main loop, displays the current situation, receives input, validates commands, updates state, and determines whether play continues.
+GameState: Stores changing information such as current location, quest progress, unlocked routes, previous decisions, and end-game status.
+Character: Serves as an abstract base class that defines shared character information and required behavior.
+Player, NPC, and Enemy: Inherit from Character and provide specialized inventory, interaction, and combat behavior.
+Item: Represents a collectible or usable object, such as a healing item, key, or quest object.
+Location: Represents one place and identifies the other locations that can be reached from it.
+WorldGraph: Implements the world map as vertices (locations) and edges (valid routes), without using a prebuilt graph library.
+
+
+
+3. Advanced Concepts
+1. Abstract Classes
+Character will be abstract and will declare at least one pure virtual behavior. A generic Character therefore cannot be instantiated without a specific role.
+2. Inheritance
+Player, NPC, and Enemy will inherit shared fields and behavior from Character while adding role-specific state and actions.
+3. Polymorphism
+The game will use base-class pointers or references to interact with multiple character types. Overridden virtual functions will cause NPCs and enemies to respond differently through the same interface.
+4. Graph Implemented From Scratch
+WorldGraph will implement adding locations, connecting them, finding a location, listing destinations, and verifying valid travel. Locations are vertices and routes are edges.
+5. Recursion Outside Sorting
+A recursive depth-first search will traverse the world graph to determine reachability, reveal connected areas, or find a path through the trial.
+6. Sorting
+A sorting algorithm written directly in C++ will order inventory or results by name, value, score, or another meaningful property instead of relying only on std::sort.
+
+
+
+
+
+
+
+
+
