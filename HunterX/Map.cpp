@@ -202,7 +202,7 @@ Map::gridBoundaries Map::getGridBoundaries(Area& area) {
 		}
 	}
 
-	if (locations.empty()) {
+	if (!bounds) {
 		std::cout << "No locations found." << std::endl;
 	}
 	else {
@@ -228,7 +228,56 @@ std::vector<std::string> Map::canvas(int width,int height) {
 	return canvas;
 }
 
-void Map::drawLocations(std::vector<std::string>& blueprint, Area& area, gridBoundaries boundaries) {
+void Map::drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries) {
+	std::vector<Location>& locations = area.getLocations();
+
+	for (const Location& location : locations) {
+		if (location.isBorder()) {
+			continue;
+		}
+		Location::Coordinates position = location.getCoordinates();
+		std::vector<Location*> neighbors = location.getNeighbors();
+		int column = (position.x - boundaries.minimum.x) * 16;
+		int row = (boundaries.maximum.y - position.y) * 2;
+		for (const Location* neighbor : neighbors) {
+			Location::Coordinates neighborPosition = neighbor->getCoordinates();
+			int neighborColumn = (neighborPosition.x - boundaries.minimum.x) * 16;
+			int neighborRow = (boundaries.maximum.y - neighborPosition.y) * 2;
+
+			bool vertical = (column == neighborColumn && row != neighborRow);
+			bool horizontal = (column != neighborColumn && row == neighborRow);
+			bool diagonal = (column != neighborColumn && row != neighborRow);
+
+			if (vertical) {
+				int startRow = std::min(row, neighborRow) + 1;
+				int endRow = std::max(row, neighborRow);
+				for (int i = startRow; i < endRow; i++) {
+					canvas[i][column] = '|';
+				}
+			}
+			if (horizontal) {
+				int startColumn = std::min(column, neighborColumn) + 1;
+				int endColumn = std::max(column, neighborColumn);
+				for (int i = startColumn; i < endColumn; i++) {
+					canvas[i][column] = '-';
+				}
+			}
+			if (diagonal) {
+				continue;
+			}
+
+		}
+
+
+
+
+
+
+	}
+
+}
+
+void Map::drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries) {
 	std::vector<Location>& locations = area.getLocations();
 
 	for (Location& location : locations) {
@@ -237,11 +286,11 @@ void Map::drawLocations(std::vector<std::string>& blueprint, Area& area, gridBou
 		}
 		else {
 			Location::Coordinates position = location.getCoordinates();
-			int column = position.x - boundaries.minimum.x;
-			int row = boundaries.maximum.y - position.y;
+			int column = (position.x - boundaries.minimum.x) * 16;
+			int row = (boundaries.maximum.y - position.y) * 2;
 			std::string name = location.getName();
 			for (std::size_t i = 0; i < name.size(); i++) {
-				blueprint[row][column + i] = name[i];
+				canvas[row][column + i] = name[i];
 			}
 		}
 	}

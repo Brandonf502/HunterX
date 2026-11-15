@@ -23,6 +23,7 @@ private:
 	};
 	gridBoundaries getGridBoundaries(Area& area);
 	std::vector<std::string> canvas(int width, int height);
+	void drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries);
 	void drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries);
 
 

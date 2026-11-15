@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 
 class Area;
@@ -24,6 +25,7 @@ public:
 	[[nodiscard]] Coordinates getCoordinates() const;
 	void setCoordinates(Coordinates coordinates);
 	bool isBorder() const;
+	std::vector<Location*> getNeighbors() const;
 
 private:
 	std::string name;

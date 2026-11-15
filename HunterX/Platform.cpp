@@ -22,7 +22,7 @@ int Platform::getScreenWidth() {
 
 int Platform::getScreenWidth() {
     winsize information{};
-    if (ioctl(STDOUT_FILENO, TIOCWINSZ, &information) == -1 || !information.ws_col) {
+    if (ioctl(STDOUT_FILENO, TIOCWINSZ, &information) == -1 ||  !information.ws_col) {
         return 80;
     }
 

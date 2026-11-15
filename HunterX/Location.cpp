@@ -1,5 +1,7 @@
 #include "Location.h"
 
+#include <vector>
+
 
 Location::Location(const std::string& locationName) : name(locationName) {}
 
@@ -65,4 +67,25 @@ bool Location::isBorder() const{
 		return true;
 	}
 	return false;
+}
+
+std::vector<Location*> Location::getNeighbors() const {
+	std::vector<Location*> neighbors;
+	if (getNorth() && !this->getNorth()->isBorder()) {
+		Location* northNeighbor = this->getNorth();
+		neighbors.emplace_back(northNeighbor);
+	}
+	if (getEast() && !this->getEast()->isBorder()) {
+		Location* eastNeighbor = this->getEast();
+		neighbors.push_back(eastNeighbor);
+	}
+	if (getSouth() && !this->getSouth()->isBorder()) {
+		Location* southNeighbor = this->getSouth();
+		neighbors.push_back(southNeighbor);
+	}
+	if (getWest() && !this->getWest()->isBorder()) {
+		Location* westNeighbor = this->getWest();
+		neighbors.push_back(westNeighbor);
+	}
+	return neighbors;
 }
