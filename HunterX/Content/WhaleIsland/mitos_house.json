@@ -1,0 +1,144 @@
+{
+  "id": "mitos_house",
+  "text": "Outside of Aunt Mito's House",
+  "choices": [
+    {
+      "id": "inside",
+      "label": "Go Inside",
+      "text": "Inside Mito's House",
+      "choices": [
+        {
+          "id": "living_room",
+          "returnID": "inside",
+          "label": "Go to living room",
+          "text": "In the living room",
+          "choices": [
+            {
+              "id": "vase",
+              "returnID": "living_room",
+              "label": "Examine vase",
+              "text": "It's an old vase passed down from Grandma!"
+            },
+            {
+              "id": "couch",
+              "returnID": "living_room",
+              "label": "Sit on the couch.",
+              "text": "You sit down",
+              "choices": [
+                {
+                  "id": "nap",
+                  "returnID": "couch",
+                  "label": "Take a nap.",
+                  "text": "You take a nap",
+                  "time": 1200
+                },
+                {
+                  "id": "watch_tv",
+                  "returnID": "couch",
+                  "label": "Watch tv",
+                  "text": "New's Channel"
+                }
+              ]
+            },
+            {
+              "id": "window",
+              "returnID": "living_room",
+              "label": "Look out the window.",
+              "text": "You look out the window, you can see the forest off in the distance. You subtly remember the silhouette of Ging walking away in the distance..."
+            },
+            {
+              "id": "leave",
+              "returnID": "inside",
+              "label": "Leave living Room"
+            }
+          ]
+        },
+        {
+          "id": "kitchen",
+          "returnID": "inside",
+          "label": "Go to the Kitchen.",
+          "text": "Inside the kitchen",
+          "choices": [
+            {
+              "id": "cupboard",
+              "returnID": "kitchen",
+              "label": "Look inside the Cupboard",
+              "content": [
+                {
+                  "type": "narration",
+                  "returnID": "kitchen",
+                  "text": "You look inside the Cupboard, nothing but Cups, and plates, and chinaware here."
+                },
+                {
+                  "type": "dialogue",
+                  "returnID": "kitchen",
+                  "speaker": "Player",
+                  "text": "Man, I think I might be hungry. Maybe I can ask Mito to make something for me!"
+                }
+              ]
+            },
+            {
+              "id": "mito",
+              "returnID": "kitchen",
+              "label": "Talk to Mito",
+              "text": "Huh? What's on your mind?",
+              "choices": [
+                {
+                  "id": "ask_mito_food",
+                  "returnID": "mito",
+                  "label": "Ask for food",
+                  "content":[
+                    {
+                      "type": "dialogue",
+                      "speaker": "Player",
+                      "text": "Mitoooooo, I'm hungryyyy. Could you make me something?"
+                    },
+                    {
+                      "type": "dialogue",
+                      "speaker": "Mito",
+                      "text": "Of course, go upstairs, and get washed up. When you're back I'll have a meal ready for you."
+                    }
+                  ]
+                },
+                {
+                  "id": "ask_mito_ging",
+                  "returnID": "mito",
+                  "label": "Ask about Ging",
+                  "content": [
+                    {
+                      "type": "dialogue",
+                      "speaker": "Player",
+                      "text": "Mito, how come you never talk about Ging? what was he like?"
+                    },
+                    {
+                      "type": "dialogue",
+                      "speaker": "Mito",
+                      "text":  "Because, there's nothing he can do for you that I can't do better...now go on."
+                    }
+                  ]
+                },
+                {
+                  "id": "ask_mito_exam",
+                  "returnID": "mito",
+                  "label": "Talk about Hunter Exams",
+                  "content":[
+                    {
+                      "type": "dialogue",
+                      "speaker": "Player",
+                      "text": "You know, as soon as I'm old enough I'm still going off to take the Hunter Exam. Then I'll be a REAL hunter, I'll find Ging and make him talk to me."
+                    },
+                    {
+                      "type": "dialogue",
+                      "speaker": "Mito",
+                      "text":  "Okayyy, I told you a hundred times already...Once you catch the Master of the Swamp, I'll let you do whatever you want. Until then, you hav plenty of chores to do"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

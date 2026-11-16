@@ -1,6 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 project(HunterX LANGUAGES CXX)
 
+include(FetchContent)
+
+FetchContent_Declare(
+        nlohmann_json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG v3.11.3
+)
+
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_executable(HunterX
     HunterX/Area.cpp
     HunterX/CharacterCreation.cpp
@@ -25,6 +35,7 @@ add_executable(HunterX
         HunterX/Platform.cpp
 )
 
+target_link_libraries(HunterX PRIVATE nlohmann_json::nlohmann_json)
 target_compile_features(HunterX PRIVATE cxx_std_20)
 set_target_properties(HunterX PROPERTIES CXX_EXTENSIONS OFF)
 

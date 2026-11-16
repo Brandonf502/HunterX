@@ -8,6 +8,8 @@ class Location {
 public:
 	Location(const std::string& locationName);
 	[[nodiscard]] std::string getName() const;
+	void setPath(const std::string& path);
+	[[nodiscard]] std::string getPath() const;
 	[[nodiscard]] Area* getArea() const;
 	void setArea(Area* locationArea);
 	struct Coordinates {
@@ -29,6 +31,7 @@ public:
 
 private:
 	std::string name;
+	std::string filePath;
 	Area* area = nullptr;
 	Coordinates position;
 	Location* north = nullptr;

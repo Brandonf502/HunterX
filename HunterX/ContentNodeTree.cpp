@@ -3,6 +3,10 @@
 //
 #include "ContentNodeTree.h"
 #include "Controller.h"
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include <stdexcept>
+#include <string>
 
 void ContentNodeTree::toParent() {
     if (currentNode->getParent()) {
@@ -58,6 +62,26 @@ void ContentNodeTree::moveNodes() {
         }
 
     }
+}
+
+void ContentNodeTree::loadContent(std::string& filePath) {
+    std::ifstream file(filePath);
+
+    if (!file.is_open()) {
+        throw::std::runtime_error("Unable to open file" + filePath);
+    }
+
+    nlohmann::json data;
+    file >> data;
+
+    std::string id = data.at("id").get<std::string>();
+    std::cout << "Loaded Node: " << id << std::endl;
+    addContent(data, &root);
+    displayCurrentNode();
+}
+
+void ContentNodeTree::addContent(const nlohmann::json& data, contentNode* node) {
+    node->setTextContent(data.at("text").get<std::string>());
 }
 
 

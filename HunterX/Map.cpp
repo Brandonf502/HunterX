@@ -116,6 +116,7 @@ void Map::buildMap() {
 	mitoHouse.setEast(&eastForest);
 	mitoHouse.setSouth(&Forest);
 	mitoHouse.setWest(&northRiver);
+	mitoHouse.setPath("Content/WhaleIsland/mitos_house.json");
 
 	portTown.setArea(&whaleIsland);
 	portTown.setNorth(&Forest);

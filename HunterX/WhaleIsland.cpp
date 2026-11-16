@@ -15,7 +15,7 @@ std::string WhaleIsland::locationName(Player& player) {
 	}
 }
 
-void WhaleIsland::movement(Player& player, Input& input) {
+Location* WhaleIsland::movement(Player& player, Input& input) {
 	Location* currentLocation = player.getCurrentLocation();
 	if (input.action == Action::North && currentLocation->getNorth() != nullptr) {
 		if (currentLocation->getNorth()->getName() == "North") {
@@ -51,6 +51,15 @@ void WhaleIsland::movement(Player& player, Input& input) {
 		else {
 			player.setCurrentLocation(currentLocation->getWest());
 		}
+	}
+	return currentLocation;
+}
+
+void WhaleIsland::displayContent(Player& player) {
+	Location* currentLocation = player.getCurrentLocation();
+	if (currentLocation != nullptr) {
+		std::string filePath = currentLocation->getPath();
+		whaleIslandTree.loadContent(filePath);
 	}
 
 }

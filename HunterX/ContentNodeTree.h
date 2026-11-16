@@ -5,6 +5,8 @@
 #pragma once
 #include "ContentNode.h"
 #include "Controller.h"
+#include <nlohmann/json_fwd.hpp>
+
 
 class ContentNodeTree {
 private:
@@ -17,4 +19,6 @@ public:
     Input getAction();
     Controller input();
     void moveNodes();
+    void loadContent(std::string& filePath);
+    void addContent(const nlohmann::json& data, contentNode* node);
 };

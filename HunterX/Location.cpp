@@ -9,6 +9,14 @@ std::string Location::getName() const {
 	return name;
 }
 
+void Location::setPath(const std::string& path) {
+	this->filePath = path;
+}
+
+std::string Location::getPath() const {
+	return this->filePath;
+}
+
 Area* Location::getArea() const {
 	return area;
 }

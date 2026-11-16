@@ -15,10 +15,12 @@ void AreaState::roam(Player& player) {
 		typeWrite("======== Whale Island ========\n");
 		std::string location = player.getCurrentLocation()->getName();
 		typeWrite("    ==== " + location + " ====    \n");
-		Input input = Controller().readAction();
 		Area* playerArea = player.getCurrentArea(player.getCurrentLocation());
 		WhaleIsland whaleIsland(playerArea);
+		whaleIsland.displayContent(player);
+		Input input = Controller().readAction();
 		whaleIsland.movement(player, input);
+
 
 		if (input.action == Action::Inventory) {
 			playerRequest = PlayerRequest::Inventory;
