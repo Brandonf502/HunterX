@@ -1,12 +1,14 @@
 #include "Map.h"
 
 #include <format>
+#include <cmath>
 
 #include "Location.h"
 #include "Area.h"
 #include "Controller.h"
 #include "Player.h"
 #include "TypeWrite.h"
+#include "Platform.h"
 
 void Map::buildMap() {
 
@@ -228,7 +230,7 @@ std::vector<std::string> Map::canvas(int width,int height) {
 	return canvas;
 }
 
-void Map::drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries) {
+void Map::drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries, int cellWidth) {
 	std::vector<Location>& locations = area.getLocations();
 
 	for (const Location& location : locations) {
@@ -237,12 +239,12 @@ void Map::drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries
 		}
 		Location::Coordinates position = location.getCoordinates();
 		std::vector<Location*> neighbors = location.getNeighbors();
-		int column = (position.x - boundaries.minimum.x) * 16;
-		int row = (boundaries.maximum.y - position.y) * 2;
+		int column = (position.x - boundaries.minimum.x) * cellWidth;
+		int row = (boundaries.maximum.y - position.y) * 8;
 		for (const Location* neighbor : neighbors) {
 			Location::Coordinates neighborPosition = neighbor->getCoordinates();
-			int neighborColumn = (neighborPosition.x - boundaries.minimum.x) * 16;
-			int neighborRow = (boundaries.maximum.y - neighborPosition.y) * 2;
+			int neighborColumn = (neighborPosition.x - boundaries.minimum.x) * cellWidth;
+			int neighborRow = (boundaries.maximum.y - neighborPosition.y) * 8;
 
 			bool vertical = (column == neighborColumn && row != neighborRow);
 			bool horizontal = (column != neighborColumn && row == neighborRow);
@@ -259,25 +261,28 @@ void Map::drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries
 				int startColumn = std::min(column, neighborColumn) + 1;
 				int endColumn = std::max(column, neighborColumn);
 				for (int i = startColumn; i < endColumn; i++) {
-					canvas[i][column] = '-';
+					canvas[row][i] = '-';
 				}
 			}
 			if (diagonal) {
-				continue;
+				int startColumn = std::min(column, neighborColumn) + 1;
+				int endColumn = std::max(column, neighborColumn);
+				double slope = static_cast<double> (neighborRow - row) / (neighborColumn - column);
+				int lastRow = -1;
+
+				for (int i = startColumn; i < endColumn; i++) {
+					int pathRow = row + static_cast<int>(std::round((i - column) * slope));
+					if (pathRow != lastRow) {
+						canvas[pathRow][i] = slope > 0 ? '*' : '/' + '/';
+						lastRow = pathRow;
+					}
+				}
 			}
-
 		}
-
-
-
-
-
-
 	}
-
 }
 
-void Map::drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries) {
+void Map::drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries, int cellWidth) {
 	std::vector<Location>& locations = area.getLocations();
 
 	for (Location& location : locations) {
@@ -286,8 +291,8 @@ void Map::drawLocations(std::vector<std::string>& canvas, Area& area, gridBounda
 		}
 		else {
 			Location::Coordinates position = location.getCoordinates();
-			int column = (position.x - boundaries.minimum.x) * 16;
-			int row = (boundaries.maximum.y - position.y) * 2;
+			int column = (position.x - boundaries.minimum.x) * cellWidth;
+			int row = (boundaries.maximum.y - position.y) * 8;
 			std::string name = location.getName();
 			for (std::size_t i = 0; i < name.size(); i++) {
 				canvas[row][column + i] = name[i];
@@ -296,115 +301,43 @@ void Map::drawLocations(std::vector<std::string>& canvas, Area& area, gridBounda
 	}
 }
 
-
 void Map::displayMap(Player& player) {
 	Area* currentArea = player.getCurrentArea(player.getCurrentLocation());
 	bool viewingMap = true;
-	int maxX;
-	int maxY;
-	int minX;
-	int minY;
+	std::string mapTitle = "    ======== Map ========";
 	while (viewingMap) {
+		int screenWidth = Platform::getScreenWidth();
+		std::string areaTitle = "  ====== " + currentArea->name + " ======  ";
 		clearScreen();
-		std::cout << "======== Map ========\n";
-		std::cout << currentArea->name << std::endl;
-		std::vector<Location>& locations = currentArea->getLocations();
-		bool bounds = false;
-		for (const Location& location : locations) {
-			bool isBorder = false;
-			isBorder = location.isBorder();
-			if (isBorder) {
-				continue;
-			}
-
-			Location::Coordinates position = location.getCoordinates();
-
-			if (!bounds) {
-				maxX = position.x;
-				maxY = position.y;
-				minX = position.x;
-				minY = position.y;
-				bounds = true;
-			}
-
-			if (position.x > maxX) {
-				maxX = position.x;
-			}
-			if (position.x < minX) {
-				minX = position.x;
-			}
-			if (position.y > maxY) {
-				maxY = position.y;
-			}
-			if (position.y < minY) {
-				minY = position.y;
-			}
-
+		typeWrite(mapTitle);
+		typeWrite(areaTitle);
+		if (currentArea->getLocations().empty()) {
+			std::cout << "Empty Area" << std::endl;
 		}
-		for (int i = maxY; i >= minY; i--) {
-			for (int j = minX; j <= maxX; j++) {
-				bool foundLocation = false;
-				for (Location& location : locations) {
-					bool isBorder = false;
-					isBorder = location.isBorder();
-					if (isBorder) {
-						continue;
-					}
-					Location::Coordinates position = location.getCoordinates();
-					if (position.x == j && position.y == i) {
-						foundLocation = true;
-						std::cout << location.getName();
-						if (location.getEast() && !location.getEast()->isBorder()) {
-							std::cout << std::string(16 - location.getName().size(), '-');
-						}
-						else {
-							std::cout << std::string(16 - location.getName().size(), ' ');
-						}
-					}
-				}
-				if (!foundLocation) {
-					std::cout << std::string(16, ' ');
+		else {
+			size_t longestNameLength = 0;
+			std::vector<Location>& locations = currentArea->getLocations();
+			for (const Location& location : locations) {
+				size_t length = location.getName().size();
+				if (length > longestNameLength) {
+					longestNameLength = length;
 				}
 			}
-			std::cout << std::endl;
-			for (int l = minX; l <= maxX; l++) {
-				bool found = false;
-				bool diagonal = false;
-				for (Location& location : locations) {
-					if (location.isBorder()) {
-						continue;
-					}
-					Location::Coordinates position = location.getCoordinates();
-					if (position.x == l && position.y == i) {
-						if (location.getSouth() && !location.getSouth()->isBorder()) {
-							found = true;
-							Location& thisLocation = location;
-							Location* southNeighbor = location.getSouth();
-							Location::Coordinates thisLocationpos = thisLocation.getCoordinates();
-							Location::Coordinates southNeighborpos = southNeighbor->getCoordinates();
-							diagonal = (
-								southNeighborpos.x == thisLocationpos.x &&
-								southNeighborpos.y == thisLocationpos.y - 1
-								);
-						}
-					}
-				}
-				if (found && !diagonal) {
-					std::cout << std::string(8, ' ') << "\\" << std::string(7, ' ');
-				}
-				else if (found && diagonal) {
-					std::cout << std::string(8, ' ') << "|" << std::string(7, ' ');
-				}
-				else {
-					std::cout << std::string(16, ' ');
-				}
+			gridBoundaries boundaries = getGridBoundaries(*currentArea);
+			int height = (boundaries.maximum.y - boundaries.minimum.y) * 8 + 1;
+			int usableWidth = boundaries.maximum.x - boundaries.minimum.x;
+			if (usableWidth == 0) {
+				std::cout << "terminal too small" << std::endl;
 			}
-
-			std::cout << std::endl;
+			int cellWidth = (screenWidth - static_cast<int>(longestNameLength)) / usableWidth;
+			int width = usableWidth * cellWidth + static_cast<int>(longestNameLength);
+			std::vector<std::string> mapCanvas = canvas(width, height);
+			drawPaths(mapCanvas, *currentArea, boundaries, cellWidth);
+			drawLocations(mapCanvas, *currentArea, boundaries, cellWidth);
+			for (const std::string& line : mapCanvas) {
+				std::cout << line << std::endl;
+			}
 		}
-
-
-
 		Input input = Controller().readAction();
 		if (input.action == Action::East) {
 			currentArea = currentArea->next;
@@ -415,6 +348,5 @@ void Map::displayMap(Player& player) {
 		else if (input.action == Action::Map) {
 			viewingMap = false;
 		}
-
 	}
 }

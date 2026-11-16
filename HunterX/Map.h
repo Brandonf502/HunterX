@@ -5,6 +5,7 @@
 #include "Location.h"
 #include "Player.h"
 #include "Controller.h"
+#include "Platform.h"
 
 class Player;
 class Map {
@@ -23,8 +24,9 @@ private:
 	};
 	gridBoundaries getGridBoundaries(Area& area);
 	std::vector<std::string> canvas(int width, int height);
-	void drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries);
-	void drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries);
+	void drawPaths(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries, int cellWidth);
+	void drawLocations(std::vector<std::string>& canvas, Area& area, gridBoundaries boundaries, int cellWidth);
+
 
 
 public: 
