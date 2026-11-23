@@ -60,6 +60,8 @@ void WhaleIsland::displayContent(Player& player) {
 	if (currentLocation != nullptr) {
 		std::string filePath = currentLocation->getPath();
 		whaleIslandTree.loadContent(filePath);
+		whaleIslandTree.moveNodes(player);
+		whaleIslandTree.displayCurrentNode(player);
 	}
 
 }

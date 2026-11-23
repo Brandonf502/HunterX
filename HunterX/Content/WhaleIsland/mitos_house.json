@@ -1,76 +1,154 @@
 {
   "id": "mitos_house",
+  "type": "action",
   "text": "Outside of Aunt Mito's House",
   "choices": [
     {
       "id": "inside",
+      "type": "action",
       "label": "Go Inside",
       "text": "Inside Mito's House",
       "choices": [
         {
           "id": "living_room",
           "returnID": "inside",
+          "type": "action",
           "label": "Go to living room",
           "text": "In the living room",
           "choices": [
             {
               "id": "vase",
+              "type": "interaction",
               "returnID": "living_room",
               "label": "Examine vase",
               "text": "It's an old vase passed down from Grandma!"
             },
             {
               "id": "couch",
+              "type": "action",
               "returnID": "living_room",
               "label": "Sit on the couch.",
               "text": "You sit down",
               "choices": [
                 {
                   "id": "nap",
+                  "type": "interaction",
                   "returnID": "couch",
                   "label": "Take a nap.",
-                  "text": "You take a nap",
-                  "time": 1200
+                  "text": "You take a nap"
                 },
                 {
                   "id": "watch_tv",
+                  "type": "dialogue",
                   "returnID": "couch",
-                  "label": "Watch tv",
-                  "text": "New's Channel"
+                  "label": "Watch Whale Island News",
+                  "content": [
+                    {
+                      "id": "watch_tv_1",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Anchor",
+                      "text": "Registration for the Hunter Exam is approaching. Here on Whale Island, the harbor office has a warning for anyone planning to leave on the morning tide."
+                    },
+                    {
+                      "id": "watch_tv_2",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Harbor reporter",
+                      "text": "Two men with a folding table have been charging for what they call guaranteed passage to the exam. One fisherman paid in advance. When he came back with his bag, the table was gone."
+                    },
+                    {
+                      "id": "watch_tv_3",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Anchor",
+                      "text": "The harbor office says one of the receipts was stamped with a picture of a squid. That stamp belongs to the bait shop."
+                    },
+                    {
+                      "id": "watch_tv_4",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Narrator",
+                      "text": "Mito comes in with a stack of folded towels. She stops when the report mentions the exam."
+                    },
+                    {
+                      "id": "watch_tv_5",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Mito",
+                      "text": "That's where my missing stamp went. I told the bait shop they could borrow it for one afternoon."
+                    },
+                    {
+                      "id": "watch_tv_6",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Player",
+                      "text": "Does that make you an accomplice?"
+                    },
+                    {
+                      "id": "watch_tv_7",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Mito",
+                      "text": "It makes me the person who's going down there to get it back. And if you ever have to ask which boat is yours, ask the person tying it to the dock."
+                    },
+                    {
+                      "id": "watch_tv_8",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Player",
+                      "text": "You said 'if.' You used to say I wasn't going."
+                    },
+                    {
+                      "id": "watch_tv_9",
+                      "type": "speak",
+                      "returnID": "couch",
+                      "speaker": "Mito",
+                      "text": "I also said you had to catch the Master first. Funny how well you heard the other part."
+                    }
+                  ]
                 }
               ]
             },
             {
               "id": "window",
+              "type": "interaction",
               "returnID": "living_room",
               "label": "Look out the window.",
-              "text": "You look out the window, you can see the forest off in the distance. You subtly remember the silhouette of Ging walking away in the distance..."
+              "text": "Beyond the glass, the forest slopes toward the swamp. You try to picture Ging taking the same trail, but the only face you can put to the memory is Kite's."
             },
             {
               "id": "leave",
+              "type": "action",
               "returnID": "inside",
-              "label": "Leave living Room"
+              "label": "Leave living Room",
+              "choices": []
             }
           ]
         },
         {
           "id": "kitchen",
+          "type": "action",
           "returnID": "inside",
           "label": "Go to the Kitchen.",
           "text": "Inside the kitchen",
           "choices": [
             {
               "id": "cupboard",
+              "type": "dialogue",
               "returnID": "kitchen",
               "label": "Look inside the Cupboard",
               "content": [
                 {
-                  "type": "narration",
+                  "id": "inside_cupboard",
+                  "type": "speak",
                   "returnID": "kitchen",
+                  "speaker": "Narrator",
                   "text": "You look inside the Cupboard, nothing but Cups, and plates, and chinaware here."
                 },
                 {
-                  "type": "dialogue",
+                  "id": "cupboard_dialogue",
+                  "type": "speak",
                   "returnID": "kitchen",
                   "speaker": "Player",
                   "text": "Man, I think I might be hungry. Maybe I can ask Mito to make something for me!"
@@ -79,58 +157,650 @@
             },
             {
               "id": "mito",
+              "type": "action",
               "returnID": "kitchen",
               "label": "Talk to Mito",
               "text": "Huh? What's on your mind?",
               "choices": [
                 {
                   "id": "ask_mito_food",
+                  "type": "dialogue",
                   "returnID": "mito",
                   "label": "Ask for food",
-                  "content":[
+                  "content": [
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Player",
                       "text": "Mitoooooo, I'm hungryyyy. Could you make me something?"
                     },
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Mito",
                       "text": "Of course, go upstairs, and get washed up. When you're back I'll have a meal ready for you."
+                    },
+                    {
+                      "id": "ask_mito_food_pack_lunch",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Player",
+                      "text": "Could I take some with me tomorrow? I want to get to the swamp before the sun reaches the water."
+                    },
+                    {
+                      "id": "ask_mito_food_mitos_reply",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Mito",
+                      "text": "I'll wrap you something in a clean cloth. Now show me those hands. You didn't bring the swamp home under your fingernails again, did you?"
                     }
                   ]
                 },
                 {
                   "id": "ask_mito_ging",
+                  "type": "dialogue",
                   "returnID": "mito",
                   "label": "Ask about Ging",
                   "content": [
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Player",
                       "text": "Mito, how come you never talk about Ging? what was he like?"
                     },
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Mito",
-                      "text":  "Because, there's nothing he can do for you that I can't do better...now go on."
+                      "text": "I could tell you about the boy I knew on this island. I couldn't tell you what he's like now. Sometimes I wonder about that myself."
+                    },
+                    {
+                      "id": "ask_mito_ging_kites_story",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Player",
+                      "text": "When Kite told me Ging was alive, I wanted to ask him a hundred things. All I could think to ask was what a Hunter actually does."
+                    },
+                    {
+                      "id": "ask_mito_ging_mitos_question",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Mito",
+                      "text": "You can ask Ging yourself if you find him. When you do, save one question for something you want to know about him as a person."
                     }
                   ]
                 },
                 {
                   "id": "ask_mito_exam",
+                  "type": "dialogue",
                   "returnID": "mito",
                   "label": "Talk about Hunter Exams",
-                  "content":[
+                  "content": [
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Player",
                       "text": "You know, as soon as I'm old enough I'm still going off to take the Hunter Exam. Then I'll be a REAL hunter, I'll find Ging and make him talk to me."
                     },
                     {
-                      "type": "dialogue",
+                      "id": "talking_to_mito",
+                      "returnID": "mito",
+                      "type": "speak",
                       "speaker": "Mito",
-                      "text":  "Okayyy, I told you a hundred times already...Once you catch the Master of the Swamp, I'll let you do whatever you want. Until then, you hav plenty of chores to do"
+                      "text": "Our deal stands. Catch the Master of the Swamp, and I'll let you take the Hunter Exam. Until then, you've got dishes to dry."
+                    },
+                    {
+                      "id": "ask_mito_exam_after_the_catch",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Player",
+                      "text": "Do you think you'll come down to the harbor if I catch it?"
+                    },
+                    {
+                      "id": "ask_mito_exam_harbor",
+                      "returnID": "mito",
+                      "type": "speak",
+                      "speaker": "Mito",
+                      "text": "I'm still hoping that fish outsmarts you. If it doesn't, of course I'll come."
+                    }
+                  ]
+                },
+                {
+                  "id": "mito_after_the_catch",
+                  "type": "dialogue",
+                  "returnID": "mito",
+                  "label": "Tell Mito you caught the Master",
+                  "locked": true,
+                  "content": [
+                    {
+                      "id": "mito_after_the_catch_1",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Narrator",
+                      "text": "You set your rod against the kitchen wall. Before you can speak, Mito looks at the mud on your clothes and turns the stove off."
+                    },
+                    {
+                      "id": "mito_after_the_catch_2",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Mito",
+                      "text": "The whole dock is talking. I thought they'd gotten the wrong child until they said you'd gone back for your hook."
+                    },
+                    {
+                      "id": "mito_after_the_catch_3",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Player",
+                      "text": "I wanted to tell you myself. Does our deal still count?"
+                    },
+                    {
+                      "id": "mito_after_the_catch_4",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Mito",
+                      "text": "It counts. Put your hands here a minute. You've got a cut where the line went through."
+                    },
+                    {
+                      "id": "mito_after_the_catch_5",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Narrator",
+                      "text": "Mito wraps a clean strip of cloth around your palm. Her fingers are steady until she reaches the knot."
+                    },
+                    {
+                      "id": "mito_after_the_catch_6",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Player",
+                      "text": "Will you help me figure out what to bring?"
+                    },
+                    {
+                      "id": "mito_after_the_catch_7",
+                      "type": "speak",
+                      "returnID": "mito",
+                      "speaker": "Mito",
+                      "text": "After supper. I've got a list in the pantry. I started it before you caught the fish."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "upstairs",
+          "returnID": "inside",
+          "type": "action",
+          "label": "Go upstairs",
+          "text": "The stairs creak outside your room. Your muddy fishing boots are still by the door where Mito asked you to leave them.",
+          "choices": [
+            {
+              "id": "fishing_gear",
+              "returnID": "upstairs",
+              "type": "action",
+              "label": "Check your fishing gear",
+              "text": "Your rod leans against the wall beside a tin of spare hooks. There's a rough sketch of the swamp tucked under the tin.",
+              "choices": [
+                {
+                  "id": "check_fishing_line",
+                  "type": "interaction",
+                  "returnID": "fishing_gear",
+                  "label": "Inspect the line",
+                  "text": "The last few inches feel rough between your fingers. Something rubbed them against the roots on your last trip. You'll need to cut back to smooth line before you tie on another hook."
+                },
+                {
+                  "id": "read_swamp_sketch",
+                  "type": "interaction",
+                  "returnID": "fishing_gear",
+                  "label": "Read the swamp sketch",
+                  "text": "Most of your marks crowd the near bank. Only one sits in open water, where you watched a wake cross the whole pool without seeing what made it."
+                }
+              ]
+            },
+            {
+              "id": "remember_kite",
+              "type": "dialogue",
+              "returnID": "upstairs",
+              "label": "Think back to meeting Kite",
+              "content": [
+                {
+                  "id": "remember_kite_narration",
+                  "type": "speak",
+                  "returnID": "upstairs",
+                  "speaker": "Narrator",
+                  "text": "Until Kite told you about Ging, you'd never had a reason to look for your father. You remember how strange it felt to hear his name from someone who knew him."
+                },
+                {
+                  "id": "remember_kite_player",
+                  "type": "speak",
+                  "returnID": "upstairs",
+                  "speaker": "Player",
+                  "text": "Next time I see Kite, I want to tell him I went looking for Ging myself. First I have to get past one fish."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "back_veranda",
+          "type": "action",
+          "returnID": "inside",
+          "label": "Step onto the back veranda",
+          "text": "Grandma sits with a bowl of peas in her lap. She's left the good chair in the sun for you.",
+          "choices": [
+            {
+              "id": "grandma_peas",
+              "type": "dialogue",
+              "returnID": "back_veranda",
+              "label": "Help Grandma shell peas",
+              "content": [
+                {
+                  "id": "grandma_peas_1",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "Set the empty pods on this side. Last time you helped, I boiled three pods and half a button."
+                },
+                {
+                  "id": "grandma_peas_2",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Player",
+                  "text": "Did Ging ever help you with this?"
+                },
+                {
+                  "id": "grandma_peas_3",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "Only if he wanted something. One morning he shelled the whole bowl before breakfast. By noon I found out he'd lent my umbrella to a stranger on the ferry."
+                },
+                {
+                  "id": "grandma_peas_4",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Player",
+                  "text": "Did the stranger bring it back?"
+                },
+                {
+                  "id": "grandma_peas_5",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "She did. Came back every spring for twenty years, too. Your father had a knack for starting things the rest of us had to finish."
+                },
+                {
+                  "id": "grandma_peas_6",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Player",
+                  "text": "Is that why Mito gets mad when I ask about him?"
+                },
+                {
+                  "id": "grandma_peas_7",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "Ask her again when she has both hands free. And tell her what you want to know. 'Tell me about Ging' is an awfully big thing to ask while the rice is boiling."
+                }
+              ]
+            },
+            {
+              "id": "grandma_mito_waiting",
+              "type": "dialogue",
+              "returnID": "back_veranda",
+              "label": "Ask Grandma how Mito has been",
+              "locked": true,
+              "content": [
+                {
+                  "id": "grandma_mito_waiting_1",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "She puts your bowl on the lowest shelf now. Someone taller would have moved it up years ago."
+                },
+                {
+                  "id": "grandma_mito_waiting_2",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Player",
+                  "text": "Did she talk about me much?"
+                },
+                {
+                  "id": "grandma_mito_waiting_3",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "Only whenever someone gave her an opening. The postman learned to ask how you were before he asked about the weather."
+                },
+                {
+                  "id": "grandma_mito_waiting_4",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Player",
+                  "text": "I thought she'd be angry I took so long to come home."
+                },
+                {
+                  "id": "grandma_mito_waiting_5",
+                  "type": "speak",
+                  "returnID": "back_veranda",
+                  "speaker": "Grandma",
+                  "text": "She was. She can be angry and put another log on the fire. I've watched her do both all winter."
+                }
+              ]
+            },
+            {
+              "id": "veranda_rain_gauge",
+              "type": "interaction",
+              "returnID": "back_veranda",
+              "label": "Check the rain jar",
+              "text": "Grandma marked yesterday's waterline with a strip of cloth. The jar has filled another finger's width overnight. By the time you reach the swamp, the stepping stones might be underwater."
+            }
+          ]
+        },
+        {
+          "id": "pantry",
+          "type": "action",
+          "returnID": "inside",
+          "label": "Explore the pantry",
+          "text": "The pantry smells of dried citrus and woodsmoke. Every jar has a label, even the empty one marked GOOD BUTTONS.",
+          "choices": [
+            {
+              "id": "pantry_notebook",
+              "type": "interaction",
+              "returnID": "pantry",
+              "label": "Read the household notebook",
+              "text": "Most of the page is rice, lamp oil, and ferry fare. In the margin Mito has penciled the price of a ticket off the island. The total has been erased and written again three times."
+            },
+            {
+              "id": "pantry_mito_lunch",
+              "type": "dialogue",
+              "returnID": "pantry",
+              "label": "Ask Mito about the wrapped lunch",
+              "content": [
+                {
+                  "id": "pantry_mito_lunch_1",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Player",
+                  "text": "There's a bundle here with my name on it. Is it for fishing?"
+                },
+                {
+                  "id": "pantry_mito_lunch_2",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Mito",
+                  "text": "That's for missing lunch. You've done it three times this week."
+                },
+                {
+                  "id": "pantry_mito_lunch_3",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Player",
+                  "text": "You counted?"
+                },
+                {
+                  "id": "pantry_mito_lunch_4",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Mito",
+                  "text": "I made lunch three times. Of course I counted."
+                }
+              ]
+            },
+            {
+              "id": "pantry_departure_lunch",
+              "type": "dialogue",
+              "returnID": "pantry",
+              "label": "Pick up the lunch Mito packed for the ferry",
+              "locked": true,
+              "content": [
+                {
+                  "id": "pantry_departure_lunch_1",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Narrator",
+                  "text": "The knot in the cloth is the one Mito taught you for tying a line in the dark."
+                },
+                {
+                  "id": "pantry_departure_lunch_2",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Player",
+                  "text": "If I untie this, I don't think I'll be able to tie it as neatly again."
+                },
+                {
+                  "id": "pantry_departure_lunch_3",
+                  "type": "speak",
+                  "returnID": "pantry",
+                  "speaker": "Mito",
+                  "text": "Then enjoy looking at it until you get hungry. There's an extra plum at the bottom. Don't trade it for anything."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "spare_room",
+          "type": "action",
+          "returnID": "inside",
+          "label": "Look in the spare room",
+          "text": "The spare room holds a narrow bed, a cedar chest, and folded blankets that smell like sun-warmed cotton.",
+          "choices": [
+            {
+              "id": "spare_room_height_marks",
+              "type": "interaction",
+              "returnID": "spare_room",
+              "label": "Read the marks on the doorframe",
+              "text": "Your marks climb one side of the frame. Across from them, somebody sanded down an older set. You can still make out a crooked G at about the height of your shoulder."
+            },
+            {
+              "id": "killua_guest_room",
+              "type": "dialogue",
+              "returnID": "spare_room",
+              "label": "Show Killua where he can sleep",
+              "locked": true,
+              "content": [
+                {
+                  "id": "killua_guest_room_1",
+                  "type": "speak",
+                  "returnID": "spare_room",
+                  "speaker": "Killua",
+                  "text": "I thought you'd grown up chasing frogs around a swamp. You never said you had a guest room."
+                },
+                {
+                  "id": "killua_guest_room_2",
+                  "type": "speak",
+                  "returnID": "spare_room",
+                  "speaker": "Player",
+                  "text": "It mostly has blankets. You can take whichever one doesn't itch."
+                },
+                {
+                  "id": "killua_guest_room_3",
+                  "type": "speak",
+                  "returnID": "spare_room",
+                  "speaker": "Killua",
+                  "text": "Your aunt asked what I wanted for breakfast. I told her anything was fine and she said that wasn't a food."
+                },
+                {
+                  "id": "killua_guest_room_4",
+                  "type": "speak",
+                  "returnID": "spare_room",
+                  "speaker": "Player",
+                  "text": "It isn't. Go tell her what you actually want."
+                },
+                {
+                  "id": "killua_guest_room_5",
+                  "type": "speak",
+                  "returnID": "spare_room",
+                  "speaker": "Narrator",
+                  "text": "Killua looks toward the kitchen. A minute later, you hear him ask for eggs in a voice just loud enough to carry."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "evening_at_home",
+          "type": "action",
+          "returnID": "inside",
+          "label": "Spend the evening at home",
+          "text": "The dishes have dried. Mito lights a lamp at the kitchen table while Killua tries to get the radio to pick up anything besides the ferry schedule.",
+          "locked": true,
+          "choices": [
+            {
+              "id": "mito_box_handoff",
+              "type": "dialogue",
+              "returnID": "evening_at_home",
+              "label": "Sit with Mito at the kitchen table",
+              "content": [
+                {
+                  "id": "mito_box_handoff_1",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Narrator",
+                  "text": "Mito sets a small box down between the teacups. Her hand stays on it after she lets go."
+                },
+                {
+                  "id": "mito_box_handoff_2",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Mito",
+                  "text": "Ging left this for you. He asked me to give it to you if you became a Hunter."
+                },
+                {
+                  "id": "mito_box_handoff_3",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Player",
+                  "text": "How come you never mentioned it?"
+                },
+                {
+                  "id": "mito_box_handoff_4",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Mito",
+                  "text": "Because every time I thought about it I could already see you trying to get it open. I wanted you to have a few years where a box could just be a box."
+                },
+                {
+                  "id": "mito_box_handoff_5",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Grandma",
+                  "text": "And she once put it out with the rubbish. I fetched it back before the cart came."
+                },
+                {
+                  "id": "mito_box_handoff_6",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Mito",
+                  "text": "I heard that cart coming all the way up the hill. I was grateful you got there first."
+                },
+                {
+                  "id": "mito_box_handoff_7",
+                  "type": "speak",
+                  "returnID": "evening_at_home",
+                  "speaker": "Narrator",
+                  "text": "This time, when you reach for the box, Mito moves her hand."
+                }
+              ]
+            },
+            {
+              "id": "gings_box",
+              "type": "action",
+              "returnID": "evening_at_home",
+              "label": "Open Ging's box with Killua",
+              "text": "There is no keyhole. You follow the seam with your thumb and let Nen gather around your hands. The seal gives. Inside are a ring, a cassette, and a memory card.",
+              "locked": true,
+              "choices": [
+                {
+                  "id": "ging_ring",
+                  "type": "interaction",
+                  "returnID": "gings_box",
+                  "label": "Inspect the ring",
+                  "text": "You turn the ring over in your palm. It looks like something you could buy at a market until the light catches the markings."
+                },
+                {
+                  "id": "ging_cassette",
+                  "type": "dialogue",
+                  "returnID": "gings_box",
+                  "label": "Listen to Ging's cassette",
+                  "content": [
+                    {
+                      "id": "ging_cassette_1",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Narrator",
+                      "text": "The tape hisses. You recognize Ging's name before you get used to the sound of his voice."
+                    },
+                    {
+                      "id": "ging_cassette_2",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Ging",
+                      "text": "You must have earned your license if you've gotten this far. If you still want to meet me after hearing this, you'll have to find me yourself."
+                    },
+                    {
+                      "id": "ging_cassette_3",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Narrator",
+                      "text": "There is a pause long enough for you to think the recording is over. Then the reels spin backward. When the tape plays again, all you hear is hiss."
+                    },
+                    {
+                      "id": "ging_cassette_4",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Player",
+                      "text": "I wish I'd thought of what I'd want to say back. I just sat there."
+                    },
+                    {
+                      "id": "ging_cassette_5",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Killua",
+                      "text": "You can tell him when you find him. Come on. We still have that card."
+                    }
+                  ]
+                },
+                {
+                  "id": "ging_memory_card",
+                  "type": "dialogue",
+                  "returnID": "gings_box",
+                  "label": "Show Killua the memory card",
+                  "content": [
+                    {
+                      "id": "ging_memory_card_1",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Killua",
+                      "text": "That's for a JoyStation. See the notch? It only goes in one way."
+                    },
+                    {
+                      "id": "ging_memory_card_2",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Player",
+                      "text": "So if we find the console, we can see what's on it?"
+                    },
+                    {
+                      "id": "ging_memory_card_3",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Killua",
+                      "text": "We can read the save. We'd still need the game. I wonder why he'd leave you one without the other."
+                    },
+                    {
+                      "id": "ging_memory_card_4",
+                      "type": "speak",
+                      "returnID": "gings_box",
+                      "speaker": "Player",
+                      "text": "Let's write down whatever the save says. After that tape, I don't want to trust anything to stay put."
                     }
                   ]
                 }

@@ -3,3 +3,4 @@
 
 void typeWrite(const std::string&);
 void clearScreen();
+void clearContentArea();

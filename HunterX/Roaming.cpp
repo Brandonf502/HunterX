@@ -17,7 +17,14 @@ void AreaState::roam(Player& player) {
 		typeWrite("    ==== " + location + " ====    \n");
 		Area* playerArea = player.getCurrentArea(player.getCurrentLocation());
 		WhaleIsland whaleIsland(playerArea);
-		whaleIsland.displayContent(player);
+		bool hasContent = !player.getCurrentLocation()->getPath().empty();
+		if (hasContent) {
+			typeWrite("Press Enter.");
+			Input input = Controller().readAction();
+			if (input.action == Action::Enter) {
+				whaleIsland.displayContent(player);
+			}
+		}
 		Input input = Controller().readAction();
 		whaleIsland.movement(player, input);
 
